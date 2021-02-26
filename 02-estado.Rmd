@@ -1,0 +1,56 @@
+---
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+# Instituciones, Estado, Economía
+
+## Definiciones
+
+-   Instituciones: los individuos que pueblan una sociedad actúan e interactúan teniendo en cuenta las normas sociales y jurídicas prevalecientes. A este conjutno de *reglas de juego* es a lo que se le suele denominar como instituciones. El área de la economía institucional con todas sus variantes es un campo e intenso debate.
+
+-   Estado: en términos de Max Weber es un sistema de administración burocrática y legal capaz de gobernar una población y un territorio, y que reclama el monopolio del légitimo uso de la fuerza.
+
+En las sociedades estatales hay una fuente de autoridad centralizada, ej. presidente, que se apoya en una jerarquía de subordinados, quienes hacen uso del poder coercitivo del Estado para imponer el cumplimiento de normas al resto de la sociedad. La fuente de autoridad es superior a otra que haya en el territorio, por eso se considerda soberana. La autoridad para la toma de decisiones deriva de la asociación formal con el soberano @fukuyama2011
+
+En el libro ¿Por qué Fracasan los Países? los economistas Daron Acemoglu y James Robinson argumentan que son las instituciones políticas y económicas las determinantes el éxito económico. Estos autores distinguen entre instituciones inclusivas y extractivas. Las primeras son aquellas que estimulan la párticipación de un gran número personas en las actividades económicas donde hacen el mejor uso de sus habilidades y talentos, y permiten que los individuos elijan libremente. La propiedad privada, sistema legal imparcial, y provisión de los servicios públicos (no restringir únicamente a los servicios domiciliarios básicos) necesarios para igualar el campo de juego en el que los individuos llevan cabo los intercambios y contratos. No hay barreras de entrada a los negocios ni a la elección de carreras.
+
+Este tipo de instituiciones promueven la productividad y la prosperidad económica. Por contra, las instituciones extractivas son aquellas que están diseñadas para extraer el ingreso y la riqueza de unos miembros de la sociedad para beneficiar a otros. Los derechos de propiedad inseguros, el clientelismo, la corrupción, son prácticas extractivas que detienen el avance social ¿Cuál es el origen de estas instituciones? ¿Es el resultado del diseño deliberado o son propiedades emergentes? ¿Estamos condenados por la historia?
+
+## Democratización, idas y venidas
+
+Si bien la taxonomía propuesta por Acemoglu y Robinson no se traslada directamente a la presencia de un régimen democrático, si se puede argumentar que hay una correspondencia cercana entre la idea de instituciones inclusivas y la democracia. Esta última se podría entender a partr de la existencia de tres elementos interdependientes:
+
+1.  Instituciones y procedimientos a través de los cuales los ciudadanos pueen efectivamente expresar sus preferencias respecto a políticas y líderes. Las votaciones libres y transparentes son uno de los más importantes
+
+2.  Restricciones institucionalizadas al ejercicio del poder por parte del ejecutivo. El llamado sistema de pesos y contrapesos.
+
+3.  Garantías de libertades civiles a todos los ciudadanos en su vida cotidiana así como en la participación política
+
+A partir de estos tres elementos el [Polity Project](https://www.systemicpeace.org/inscrdata.html), caracteriza a las sociedades en una escala que va de -10, fuertemente autocrático, a +10, fuertemente democrático. La medición para Colombia es como sigue
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(readxl)
+library(ggplot2)
+library(plotly)
+polityv<-read_excel("C:/Users/andre/Google Drive/Uninorte/Uninorte-docencia/2021/Intro Eco Colombiana/polityv.xlsx")
+col<-subset(polityv,scode=="COL")
+colgraf<-ggplot(col,aes(x=year, y=polity2))+geom_line(color="black",size=1) +
+ylab("Grado de democracia")+xlab("Año")+geom_vline(xintercept =1953, color="red")+geom_vline(xintercept =1991, color="red")
+colgraf<-ggplotly(colgraf)
+colgraf
+
+
+```
+
+La construcción del Estado colombiano no ha sido un proceso lineal y pacífico. Por el contario, la pugnacidad entre partidos políticos, la oposición armadar al gobierno, el narcotráfico, entre otros fenómenos, han impregnado a la sociedad colombiana de una violencia sistemática que se niega a desaparecer. Al tiempo que ha facilitado, y hasta promovido, normas sociales y conductas individuales depredadoras y rentistas. Recientemente el país parece haber superado la violencia política partidista, ha hecho esfuerzos por promover la apertura política, ha defendido la competencia económica y la libertad de empresa. Sin embargo, el clientelismo, la corrupción, y la presencia desigual del Estado en el territorio, amenazan los avances logrados.
+
+## Estructura del Estado Colombiano
+
+```{r, echo=FALSE, fig.cap="Estructura del Estado Colombiano"}
+knitr::include_graphics("estadocol.png")
+```
+
+El poder público ejecuta las acciones necesarias para alcanzar los fines del Estado. Los organismos autónomos tienen un régimen especial y autonomía para desempeñar funciones específicas. Los organismos de control verifican y controlan la gestión fiscal y administrativa de las entidades públicas. No están adscritos ni vinculados a las ramas del poder público. En el ámbito económico, las entidades más importantes son el Ministerio de Hacienda, el Departamento Nacional de Planeación, y el Banco de la República. Consulte [aquí](https://www.funcionpublica.gov.co/eva/gestornormativo/manual-estado/index.php)

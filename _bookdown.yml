@@ -1,0 +1,5 @@
+book_filename: "int_eco_col"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Capítulo "

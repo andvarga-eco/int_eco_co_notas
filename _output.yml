@@ -1,0 +1,7 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: null 
+      after: null
+      download: ["pdf"]

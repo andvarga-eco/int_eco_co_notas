@@ -30,7 +30,7 @@ Si bien la taxonomía propuesta por Acemoglu y Robinson no se traslada directame
 
 A partir de estos tres elementos el [Polity Project](https://www.systemicpeace.org/inscrdata.html), caracteriza a las sociedades en una escala que va de -10, fuertemente autocrático, a +10, fuertemente democrático. La medición para Colombia es como sigue
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.cap="Democratización a lo largo del tiempo. Fuente: PolityV Project"}
 
 library(readxl)
 library(ggplot2)

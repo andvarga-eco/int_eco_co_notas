@@ -1,7 +1,13 @@
 --- 
 title: "Introducción a la Economía Colombiana"
 author: "Andrés Vargas"
-date: "2021-02-26"
+output:
+  bookdown::pdf_book:
+  keep_tex: yes
+  citation_package: biblatex
+  bookdown::html_book:
+    css: toc.css
+date: "2021-02-28"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

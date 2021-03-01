@@ -75,8 +75,33 @@ bft<-bold(bft,i=c(1,6,10))
 bft<-theme_zebra(bft)
 bft<-set_header_labels(bft,Y2019Bn="2019 ($Bn)",Y2019PIB="2019 (%PIB)")
 bft <- set_table_properties(bft, layout = "autofit", width = .5)
+bft<-set_caption(bft,caption="Ingresos y Gastos GNC. Fuente: Plan Financiero 2020",style="Table Caption")
 bft
 
+
+```
+
+
+
+Como vemos, el GNC tuvo un déficit de $26 billones durante 2019, los cuales tuvo que financiar de alguna manera. Más adelante veremos la composición del endeudamiento público. Desde el punto de vista de los ingresos es claro que los tributarios son lo más importantes, mientras que desde el punto de vista del gasto aquellos destinados a funcionamiento se llevan la mayor tajada, seguido de los intereses de la deuda. Dentro de los gastos de funcionamiento se encuentran las transferencias que hace la Nación a las entidades territoriales, municIpios y gobernaciones, y que en gran medida van dirigidas a financiar la ejecución de gasto social. 
+
+Del total del gasto realizado por el GNC, cerca del 69% financia gasto social y el restante provisión de bienes públicos [@lora2019]
+
+```{r,echo=FALSE, message=FALSE, warning=FALSE,fig.cap="Composición del gasto del GNC, 2017. Fuente: Lora (2019)"}
+
+gasto<-c("Social","Pensiones","Educación","Salud","Otros","Bienes Públicos","Seguridad y Justicia","Defensa","Función Pública","Infraestructura","Protección medio ambiente","Resto","Total")
+gastobn<-c(119.4,40.9,28.8,26.3,23,52.7,16.1,10.9,9.8,7.8,0.8,7.3,172.1)
+gastopib<-c(13,4.5,3.1,2.9,2.6,5.8,1.8,1.2,1.1,0.9,0.1,0.8,18.8)
+dfg<-data.frame(gasto,gastobn,gastopib)
+library(flextable)
+gft<-flextable(dfg)
+gft<-bold(gft,i=1, part="header")
+gft<-bold(gft,i=c(1,6,13))
+gft<-theme_zebra(gft)
+gft<-set_header_labels(gft,gasto="Concepto",gastobn="2017 ($Bn)",gastopib="2017 (%PIB)")
+gft <- set_table_properties(gft, layout = "autofit", width = .5)
+gft<-set_caption(gft,caption="Composición del gasto GNC. Fuente: Lora (2019)",style="Table Caption")
+gft
 
 ```
 

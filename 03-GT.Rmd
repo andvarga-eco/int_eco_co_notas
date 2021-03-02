@@ -21,7 +21,7 @@ Si restamos a ambos lados los impuestos, $T$, y después de reorganizar los tér
 (T-G)+(Y-T-C-I)+(M-X)=0
 \end{equation}
 
-Esta identidad nos dice que la suma del ahorro público, ahorro privado y ahorro externo es cero. Luego, si el gasto público, $G$, excede a los impuestos, $T$, entonces la suma del ahorro privado y externo debe ser positiva. Ello quiere decir que el déficit público es compensado con un superávit primario o usando ahorro del resto del mundo. En las cuentas fiscales esto se refleja en la emisión de deuda interna y/o externa. 
+Esta identidad nos dice que la suma del ahorro público, ahorro privado neto y ahorro externo es cero. Luego, si el gasto público, $G$, excede a los impuestos, $T$, entonces la suma del ahorro privado y externo debe ser positiva. Ello quiere decir que el déficit público es compensado con un superávit primario o usando ahorro del resto del mundo. En las cuentas fiscales esto se refleja en la emisión de deuda interna y/o externa. 
 
 ## Sobre el rol del Estado en la economía
 
@@ -47,7 +47,7 @@ La corrección de las fallas y la redistribución la logra el Estado a través d
 
 Las corrientes de pensamiento liberal que desconfían profundamente en la capacidad del Estado para alcanzar los objetivos que se propone y respetar las libertades individuales ven en esta narrativa de fallas del mercado demasiadas instancias de intervención estatal. Por ejemplo, @mccloskey2016 afirma 
 
-> "The fact suggest that the projects of betterment enacted by governments, compared with voluntary >deals made among consenting adults free of force or fraud, will fail, as they regularly have, because >they are directed not at general betterment but at enriching special interests at the expense of the >generality, or merely spending what money the government can appropriate under the threat of violence"
+> "The fact suggest that the projects of betterment enacted by governments, compared with voluntary deals made among consenting adults free of force or fraud, will fail, as they regularly have, because they are directed not at general betterment but at enriching special interests at the expense of the generality, or merely spending what money the government can appropriate under the threat of violence"
 >
 >`r tufte::quote_footer('--- Deirdre McCloskey')`
 
@@ -83,9 +83,24 @@ bft
 
 
 
-Como vemos, el GNC tuvo un déficit de $26 billones durante 2019, los cuales tuvo que financiar de alguna manera. Más adelante veremos la composición del endeudamiento público. Desde el punto de vista de los ingresos es claro que los tributarios son lo más importantes, mientras que desde el punto de vista del gasto aquellos destinados a funcionamiento se llevan la mayor tajada, seguido de los intereses de la deuda. Dentro de los gastos de funcionamiento se encuentran las transferencias que hace la Nación a las entidades territoriales, municIpios y gobernaciones, y que en gran medida van dirigidas a financiar la ejecución de gasto social. 
+Como vemos, el GNC tuvo un déficit de $26 billones durante 2019, los cuales tuvo que financiar de alguna manera. Más adelante veremos la composición del endeudamiento público. Desde el punto de vista de los ingresos es claro que los tributarios son lo más importantes, mientras que desde el punto de vista del gasto aquellos destinados a funcionamiento se llevan la mayor tajada, seguido de los intereses de la deuda. Dentro de los gastos de funcionamiento se encuentran las transferencias que hace la Nación a las entidades territoriales, municipios y gobernaciones, y que en gran medida van dirigidas a financiar la ejecución de gasto social. Del total de gastos de funcionamiento, %80 corresponden a transferencias que hace el GNC a otras entidades. Así, en la práctica esto implica que la ejecución del gasto social en el territorio está cargo de entidades como gobernaciones y alcaldías usando recursos que no se han generado dentro de su jurisdicción. Si bien esto permite corregir disparidades regionales en la capacidad de provisión de servicios sociales, también implica que los gobiernos locales y regionales ejecutan recursos bajo directrices del gobierno central. Todo esto hace parte del régimen de descentralización del país, así como de las pujas por mayor autonomía territorial. 
 
-Del total del gasto realizado por el GNC, cerca del 69% financia gasto social y el restante provisión de bienes públicos [@lora2019]
+```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.cap="Composición del gasto de Funcionamiento. Fuente: MFMP 2020"}
+library(ggplot2)
+gastof<-c("Servicios Personales","B/S","SGP","Pensiones","Resto")
+gastofbn<-c(23.4,6.0,41.0,36.2,42.8)
+
+gastofdf<-data.frame(gastof,gastofbn)
+ggplot(gastofdf,aes(x=gastof,y=gastofbn))+geom_col(fill="#0047AB")+
+  labs(x = "Concepto",
+       y = "$ Billones",
+       caption="Marco Fiscal de Mediano Plazo 2020") +
+  theme_bw()+theme(panel.grid.major.y = element_blank())
+
+
+```
+
+Si se desagrega el gasto total del GNC en función de las bienes y servicios que provee, encontramos que cerca del 69% es gasto social y el restante provisión de bienes públicos [@lora2019]
 
 ```{r,echo=FALSE, message=FALSE, warning=FALSE,fig.cap="Composición del gasto del GNC, 2017. Fuente: Lora (2019)"}
 

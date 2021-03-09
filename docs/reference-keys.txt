@@ -2,6 +2,7 @@ fig:unnamed-chunk-1
 fig:unnamed-chunk-2
 tab:unnamed-chunk-1
 tab:unnamed-chunk-3
+fig:unnamed-chunk-4
 introducción
 crecimiento
 introducción-1
@@ -15,3 +16,7 @@ estado-gasto-y-tributación
 gasto-público-impuestos-y-deuda
 sobre-el-rol-del-estado-en-la-economía
 cuánto-gasta-y-en-qué-gasta-el-gobierno-colombiano
+tributación
+impuestos-nacionales
+impuesto-de-renta-a-las-personas-naturales
+impuesto-de-renta-a-las-personas-jurídicas

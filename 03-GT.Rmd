@@ -83,7 +83,8 @@ bft
 
 
 
-Como vemos, el GNC tuvo un déficit de $26 billones durante 2019, los cuales tuvo que financiar de alguna manera. Más adelante veremos la composición del endeudamiento público. Desde el punto de vista de los ingresos es claro que los tributarios son lo más importantes, mientras que desde el punto de vista del gasto aquellos destinados a funcionamiento se llevan la mayor tajada, seguido de los intereses de la deuda. Dentro de los gastos de funcionamiento se encuentran las transferencias que hace la Nación a las entidades territoriales, municipios y gobernaciones, y que en gran medida van dirigidas a financiar la ejecución de gasto social. Del total de gastos de funcionamiento, %80 corresponden a transferencias que hace el GNC a otras entidades. Así, en la práctica esto implica que la ejecución del gasto social en el territorio está cargo de entidades como gobernaciones y alcaldías usando recursos que no se han generado dentro de su jurisdicción. Si bien esto permite corregir disparidades regionales en la capacidad de provisión de servicios sociales, también implica que los gobiernos locales y regionales ejecutan recursos bajo directrices del gobierno central. Todo esto hace parte del régimen de descentralización del país, así como de las pujas por mayor autonomía territorial. 
+Como vemos, el GNC tuvo un déficit de $26 billones durante 2019, los cuales tuvo que financiar de alguna manera. Más adelante veremos la composición del endeudamiento público. Desde el punto de vista de los ingresos, es claro que los tributarios son lo más importantes, mientras que desde el punto de vista del gasto aquellos destinados a funcionamiento se llevan la mayor tajada. Dentro de los gastos de funcionamiento se encuentran las transferencias que hace la Nación a las entidades territoriales, municipios y gobernaciones, y que en gran medida van dirigidas a financiar la ejecución de gasto social. Del total de gastos de funcionamiento %80 corresponden a transferencias que hace el GNC a otras entidades. Así, en la práctica, esto implica que la ejecución del gasto social en el territorio está cargo de gobernaciones y alcaldías usando recursos que no se han generado dentro de su jurisdicción. Si bien esto permite corregir disparidades regionales en la capacidad de provisión de servicios sociales, también implica que los gobiernos locales y regionales ejecutan recursos bajo directrices del gobierno central. Todo esto hace parte del régimen de descentralización del país, así como de las pujas por mayor autonomía territorial. 
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.cap="Composición del gasto de Funcionamiento. Fuente: MFMP 2020"}
 library(ggplot2)
@@ -119,4 +120,58 @@ gft<-set_caption(gft,caption="Composición del gasto GNC. Fuente: Lora (2019)",s
 gft
 
 ```
+
+## Tributación
+
+Los impuestos pueden entenderse como aportes obligatorios que hacen los miembros de una sociedad al poder público al cual están sujetos. Todo impuesto está conformado por una tarifa y una base gravable. En general, el monto total del impuesto es $T=\tau B$, donde $tau$ es la tarifa y $B$ es la base. Imagine que el Estado propone gravar el consumo de bebidas alcohólicas. Este tiene varias alternativas: i) tarifa de $19%$ sobre el precio de venta; ii) $\$x$ por cada botella equivalente de 750 cc vendida; iii) $\$x$ por grado de alcohol en una botella equivalente de 750 cc. 
+
+Los impuestos suelen clasificarse en directos e indirectos. Los primeros gravan a la persona natural o jurídica, los segundos recaen sobre la transacción de un bien o servicio. Entre los directos encontramos el impuesto de renta, el impuesto al patrimonio, y el impuesto predial. Entre los indirectos se destacan el IVA, los aranceles, el impuesto al carbono. 
+
+La discusión tributaria suele girar alrededor de dos dimensiones: eficiencia y equidad. Si la eficiencia tiene que ver con aquella asignación de recursos escasos tal que se satisfacen de mejor manera posible los propósitos de consumidores (satisfacer las preferencias dado el presupuesto) y productores (obtener los mayores beneficios posibles dada la tecnología), entonces los impuestos son una intervención del Estado en el mercado que impide alcanzar la mejor asignación posible. En el gráfico se observa como el equilibrio de mercado estaría dado por el par ${q^e,p^e}$. El Estado aparece y coloca un impuesto al consumo del bien. Con el impuesto los consumidores pagan el precio $p^c$ y los productores reciben $p^p$, donde la diferencia $p^c-p^p$ es el impuesto por unidad vendida. Note que con el impuesto la cantidad tranzada en el mercado, $q^T$ es inferior a la que habría en ausencia del impuesto $q^e$. El triangulo señalado por las áreas A y B corresponde a transacciones mutuamente beneficiosas que podrían realizarse pero que no se llevan a cabo como consecuencia del impuesto. A esto se llama pérdida irrecuperable de eficiencia
+
+```{r,echo=FALSE, fig.cap="Pérdida de eficiencia"}
+knitr::include_graphics("eficiencia.png")
+```
+
+La equidad hace referencia al juicio que hacemos sobre la distribución de la carga tributaria. No todos los agentes de la economía pagan la misma cantidad de impuestos, ni en términos absolutos ni como proporción de su ingreso o su riqueza. En consecuencia, siempre habrán quienes consideren que la distribución observada es injusta. Algunos principios que ayudan a ordenar la discusión al respecto son
+
+- Principio de beneficio: los agentes deben contribuir en proporción al beneficio que obtienen del Estado
+
+- Capacidad de pago: la carga tributaria debe distribuirse de acuerdo a los recursos con los que cuenten los contribuyentes. Aquellos con mayores recursos deben contribuir proporcionalmente más, *equidad vertical*, y aquellos con los mismos recursos deben contribuir los mismo, *equidad horizontal*
+
+Cuando los impuestos cumplen con el criterio de equidad vertical también suelen ser llamados *progresivos*. Se les llama *regresivos* en caso contrario. En el primer caso los impuestos reducen la desigualdad y en el segundo la amplían. 
+
+### Impuestos nacionales
+
+En Colombia hay una multitud de impuestos directos e indirectos pues las personas naturales y jurídicas no solo son gravadas por el Gobierno Nacional sino también por los gobiernos municipales y departamentales. A continuación se describirán algunos impuestos de orden nacional por ser los de mayor recaudo.
+
+#### Impuesto de renta a las personas naturales
+
+La base gravable se calcula a partir de los ingresos obtenidos durante un año. En Colombia se distingue entre las rentas obtenidas por: 1) trabajo, capital y no laborales; 2) pensiones; 3) dividendos y participaciones. La fuente principal de ingreso para la mayoría de las personas son los ingresos laborales. El ingreso gravable resulta después de descontar lo que permite la Ley, como intereses pagados sobre créditos hipotecarios. Así mismo, no todo el ingreso es gravable. Las tarifas del impuesto son como siguen
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(readxl)
+t_renta <- read_excel("t_renta.xlsx", sheet = "Hoja2")
+t_renta$ingreso<-factor(t_renta$ingreso,levels=t_renta$ingreso[order(t_renta$tarifa)])
+ggplot(t_renta,aes(x=ingreso,y=tarifa))+geom_col(fill="grey60")+geom_text(aes(label=tarifa))+
+  labs(x = "Ingreso ($Millones anuales)",
+       y = "Tarifa Marginal",
+       caption="Art. 241 Estatuto tributario") +
+  theme_bw()+theme(panel.grid.major.y = element_blank())
+
+```
+Como se observa, la estructura tarifaria del impuesto de renta es progresiva. Suponga que usted tiene un ingreso gravable anual de \$140 millones ¿Cuánto debe pagar de impuesto? Por los primeros \$38.8 millones no paga nada, por los siguientes \$21.7 paga 19%, y por los restantes \$39.5 millones paga una tarifa de 28%. El monto total pagado es de \$26.4 millones, es decir una tarifa promedio, $\$145/\$26.4$, de 19%. 
+
+Para los ingresos percibidos por dividendos y participaciones aplica una tarifa especial del 10% para montos superiores a \$10.6 millones. En las discusiones sobre la equidad del sistema tributario colombiano este es un aspecto clave, pues los individuos más ricos tienden a recibir una proporción más alta de ingresos por dividendos, con lo cual en la práctica pueden terminar pagando proporcionalmente menos impuesto de renta que un trabajador asalariado de ingresos medios. 
+
+¿Cuántas personas naturales pagan impuesto de renta en Colombia? Alrededor de 2 millones de personas son declarantes de renta Colombia, declarar no significa pagar, lo cual es muy poco si se tiene en cuenta que la fuerza laboral es superior a los 20 millones de personas. Una de las razones es que el umbral de ingresos a partir del cual se tributa es muy elevado, incluso para estándares latinoamericanos. 2.8 veces respecto al PIB per cápita en Colombia frente a 1.4 veces en Latinoamérica ^[Ver Comisión de expertos para la equidad y competitivdad tributaria, capítulo 2, https://www.repository.fedesarrollo.org.co/handle/11445/3284]. 
+
+Del total del recaudo tributario por impuesto de renta (naturales y jurídicas) las personas naturales representan crca del 15%. El restante está a cargo de las personas jurídicas, en particular el grupo de grandes contribuyentes, como veremos a continuación.
+
+#### Impuesto de renta a las personas jurídicas
+
+La base gravable sobre la cual tributan las empresas se calcula a partir de descontar del valor bruto de producción o ventas los costos de producción y la depreciación de activos. Sobre esta base se aplica una tarifa plana de 32% en 2020, 31% en 2021, y $30% de 2022 en adelante. En la actualidad hay tarifas especiales para algunas actividades. Para los servicios hoteleros es del 9% y para los usuarios de zonas francas es del 20%. A las entidades financieras, por el contrario, se les incrementó de manera temporal la tarifa de renta en 4pb en 2020, 3pb en 2021 y 2022. 
+
+La tarifa de renta para sociedades en Colombia es comparativamente alta. Por ejemplo, para el promedio de la OECD esta es inferior al 30%. Adicionalmente, las tafifas especiales crean un sistema inequitativo horizontalmente pues dá tratamiento especial a algunas empresas en virtud de la actividad que desarrollan o el lugar donde se ubican. En relación al recaudo total del impuesto de renta, las empresas contribuyen con el 85%. Es importante destcar que el grupo conocido como grandes contribuyentes, alrededor de 3500 empresas, representan cerca del 67% del recuado de este tributo. 
 

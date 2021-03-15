@@ -7,7 +7,7 @@ output:
   citation_package: biblatex
   bookdown::html_book:
     css: toc.css
-date: "2021-03-09"
+date: "2021-03-14"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -18,3 +18,4 @@ description: "Notas de clase de Introducción a la Economía Colombiana"
 
 # Introducción
 
+Notas de clase de la asignatura Introducción a la Economía Colombiana. Están bajo permanente revisión y actualización. Comentarios o sugerencias a andresmv@uninorte.edu.co

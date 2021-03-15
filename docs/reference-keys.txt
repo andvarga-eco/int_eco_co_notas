@@ -20,3 +20,8 @@ tributación
 impuestos-nacionales
 impuesto-de-renta-a-las-personas-naturales
 impuesto-de-renta-a-las-personas-jurídicas
+iva
+dinero-y-precios
+introducción-2
+qué-es-el-dinero
+nivel-de-precios-ipc-e-inflación

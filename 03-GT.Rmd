@@ -175,3 +175,7 @@ La base gravable sobre la cual tributan las empresas se calcula a partir de desc
 
 La tarifa de renta para sociedades en Colombia es comparativamente alta. Por ejemplo, para el promedio de la OECD esta es inferior al 30%. Adicionalmente, las tafifas especiales crean un sistema inequitativo horizontalmente pues dá tratamiento especial a algunas empresas en virtud de la actividad que desarrollan o el lugar donde se ubican. En relación al recaudo total del impuesto de renta, las empresas contribuyen con el 85%. Es importante destcar que el grupo conocido como grandes contribuyentes, alrededor de 3500 empresas, representan cerca del 67% del recuado de este tributo. 
 
+#### IVA
+
+Sección por desarrollar
+

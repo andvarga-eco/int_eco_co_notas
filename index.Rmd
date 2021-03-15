@@ -18,3 +18,4 @@ description: "Notas de clase de Introducción a la Economía Colombiana"
 
 # Introducción
 
+Notas de clase de la asignatura Introducción a la Economía Colombiana. Están bajo permanente revisión y actualización. Comentarios o sugerencias a andresmv@uninorte.edu.co

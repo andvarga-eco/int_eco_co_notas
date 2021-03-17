@@ -44,7 +44,7 @@ El IPC, índice de Precios al Consumidor, mide cuánto cuesta la canasta de cons
 
 El IPC y la inflación juega un papel muy importante en Colombia. Por un lado, hay una multitud de precios que están indexados al IPC, es decir que la fijación de esos precios se hace tomando como referencia el IPC. Piense en el salario mínimo. Por otro lado, la inflación es la variable objetivo de la política monetaria. Es decir que las acciones del Banco de la República están encaminadas a controlar la inflación y mantenerla dentro del 2% y 4% anual, con una meta puntual de 3%. 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.caption="Inflación en Colombia 1955-2021"}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Inflación en Colombia 1955-2021"}
 library(readxl)
 library(ggplot2)
 library(plotly)

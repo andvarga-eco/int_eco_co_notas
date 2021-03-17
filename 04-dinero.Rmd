@@ -8,7 +8,7 @@ En este módulo se abordará la idea de dinero y su relación con el comportamie
 
 En la actualidad la creación de dinero es monopolio de los gobiernos nacionales, sin embargo, eso no siempre ha sido así, y no tiene porque seguir siendo así. Empecemos por intentar definir el término dinero. Si buscamos en el diccionario de la Real Academía Española encontramos que es definido como moneda corriente. Pero eso no nos lleva muy lejos en nuestro intento de comprender. F.A Hayek, por ejemplo, se lamenta que intentemos describir el dinero como un sustantivo. Sugiere que lo veamos como un adjetivo que describe una propiedad que diferentes cosas tienen en diferente grado @hayek76. Cuando hablamos de dinero hacemos referencia a las funciones que cumple. Unidad de cuenta, medio de pago, y depósito de valor. De esta manera, a lo largo de la historia de la humanidad se han usado múltiples objetos para cumplir estas funciones. Por ejemplo, las conchas marinas, *Cypraea*, fueron usadas comúnmente por las caravanas de comerciantes árabes en [África occidental](https://www.culturesofwestafrica.com/cowrie-shell-monetary-symbolic-value/). 
 
-En el caso de América Latina se dice que durante la colonia coexistieron las monedas españolas con las diferentes monedas locales indígenas, como los granos de cacao.  Las monedas españolas eran principalmente acuñadas en plata y la unidad usualmente usada era el peso fuerte de plata. En los inicios de la historia de Colombia como república independiente circularon simultáneamente diversas especies monetarias y los billetes emitidos por bancos privados, los cuales eran redimibles por moneda metálica^[Antono Hernández Gamarra, Las especies monetarias en Colombia, 2016, http://www.revistacredencial.com/credencial/historia/temas/las-especies-monetarias-en-colombia]. 
+En el caso de América Latina se dice que durante la colonia coexistieron las monedas españolas con las diferentes monedas locales indígenas, como los granos de cacao.  Las monedas españolas eran principalmente acuñadas en plata y la unidad usualmente usada era el peso fuerte de plata. En los inicios de la historia de Colombia como república independiente circularon simultáneamente diversas especies monetarias y los billetes emitidos por bancos privados, los cuales eran redimibles por moneda metálica^[Antonio Hernández Gamarra, Las especies monetarias en Colombia, 2016, http://www.revistacredencial.com/credencial/historia/temas/las-especies-monetarias-en-colombia]. 
 
 Desde la creación del Banco de la República en 1923, la emisión de dinero, peso colombiano, ha sido monopolio de esta entidad. Hasta 1931 los billetes emitidos por eran redimibles por su equivalente en oro. Así, dado que las cosas que usamos como dinero no tienen ningún valor intrínseco decimos que lo que circula es dinero fiduciario. Tienen valor porque confiamos en el que alguien más las aceptará al momento de realizar una transacción por el valor que simboliza. Es un sistema basado en la confianza.
 
@@ -37,3 +37,28 @@ eth1
 ```
 
 ## Nivel de precios, IPC e inflación
+
+Cuando hablamos del nivel de precios hacemos referencia al costo de adquirir una canasta particular de bienes y servicios. De esta manera, cada vez que usted escucha hablar del IPC y la inflación, esto está haciendo referencia a la variación en el costo de la canasta de bienes y servicios típicamente consumida por un consumidor. Dado que una canasta está compuesta por diferentes bienes y servicios, y el consumidor destina una proporción diferente del ingreso a la adquisición de cada bien y servicio, entonces es importante tener en cuenta dicha composición para poder calcular en cuánto cambia el costo total de la canasta. Por ejemplo, en las mediciones actuales los gastos en vivienda se ponderan en 33.1%. En promedio, un consumidor en Colombia de cada \$100 pesos que gasta mensualmente, \$33.1 son en rubros de vivienda. El gasto en alimentos y bebidas se lleva el 15% del gasto, mientras que el 1.7% se dedica a bebidas alcohólicas y tabaco. 
+
+El IPC, índice de Precios al Consumidor, mide cuánto cuesta la canasta de consumo en relación a un periodo base. Así, el IPC actual tiene como periodo base diciembre de 2018, es decir que en ese mes el IPC toma el valor de 100. En febrero de 2021 el IPC tomó el valor de 106.58, esto quiere decir que el costo de la canasta en febrero de 2021 fue un 6.58% más costosa que en diciembre 2018. La inflación, por su parte, mide cuánto fue el cambio porcentual del IPC en un periodo dado de tiempo. Así, si decimos que en febrero de 2021 la inflación anual fue de 1.6% lo que queremos decir es que el IPC en febrero 2021 es un 1.6% más alto que el IPC en el mismo mes del año 2020. La inflación mensual mide entonces el cambio porcentual del IPC de un mes respecto al mes inmediatamente anterior. En febrero 2021 la inflación mensual fue de 0.64%.
+
+El IPC y la inflación juega un papel muy importante en Colombia. Por un lado, hay una multitud de precios que están indexados al IPC, es decir que la fijación de esos precios se hace tomando como referencia el IPC. Piense en el salario mínimo. Por otro lado, la inflación es la variable objetivo de la política monetaria. Es decir que las acciones del Banco de la República están encaminadas a controlar la inflación y mantenerla dentro del 2% y 4% anual, con una meta puntual de 3%. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.caption="Inflación en Colombia 1955-2021"}
+library(readxl)
+library(ggplot2)
+library(plotly)
+ipc <- read_excel("ipc.xlsx")
+ipc$date<-as.Date(ipc$fecha)
+ipcplot<-ggplot(ipc,aes(x=date,y=infanual))+geom_line(color="black",size=1)+
+  ylab("Inflación mensual")+xlab("Fecha")+geom_vline(xintercept =as.numeric(as.Date("1999-10-01")), color="red")+geom_vline(xintercept =as.numeric(as.Date("1991-07-01")), color="blue")
+ipcplot<-ggplotly(ipcplot)
+ipcplot
+```
+
+Como se observa en el gráfico, la inflación en Colombia ha pasado por varias etapas. Note como desde 1970 la variación anual de los precios estaba siempre por encima del 10%. Sin embargo, a partir de 1991 la inflación empieza a descender sistemáticamente, hasta alcanzar cifras por dejo del 10% desde finales del año 1999. En los últimos 20 años la inflación se ha mantenido por debajo del 10%, y en la actualidad es inferior al 3%. En el periodo de tiempo que va desde 1990 hasta nuestros días son dos los hechos más notables en lo que a política monetaria se refiere y su relación con la inflación. El primero, es la designación del Banco de la República como un ente independiente del gobierno cuya función principal es el control de la inflación ^[Ver https://www.banrep.gov.co/sites/default/files/paginas/historia-banco-sept.pdf]. El segundo, es la adopción del régimen de inflación objetivo como estrategia de política monetaria usando como principal instrumento de política la tasa de interés. Esto último sucede a finales de 1999 cuando Colombia decide abandonar la política de bandas cambiarias y dejar que la tasa de cambio fluctúe libremente. 
+
+## Dinero y precios
+
+¿Qué tiene que ver el dinero con el nivel de precios de la economía y la inflación? 
+

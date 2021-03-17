@@ -25,3 +25,4 @@ dinero-y-precios
 introducción-2
 qué-es-el-dinero
 nivel-de-precios-ipc-e-inflación
+dinero-y-precios-1

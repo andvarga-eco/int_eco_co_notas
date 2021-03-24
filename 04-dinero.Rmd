@@ -60,5 +60,102 @@ Como se observa en el gráfico, la inflación en Colombia ha pasado por varias e
 
 ## Dinero y precios
 
-¿Qué tiene que ver el dinero con el nivel de precios de la economía y la inflación? 
+¿Qué tiene que ver el dinero con el nivel de precios de la economía y la inflación? Para verlo podemos plantear la siguiente identidad contable
+
+\begin{equation}
+MV\equiv PY 
+\end{equation}
+
+Donde $M$ es el dinero en circulación, $V$ es la velocidad de circulación del dinero, esto es la cantidad de veces que la cantidad de dinero rota durante la generación del ingreso agregado, $P$ es el nivel de precios de la economía y $Y$ el producto real, luego $PY$ es el valor nominal de la producción (PIB nominal). A esta identidad se le conoce como ecuación de intercambio. El producto $MV$ significa que el stock de dinero se convierte a través de $V$ en un flujo de gasto monetario. Es la cantidad de gasto nominal que se puede realizar durante un periodo de tiempo dado. Suponga que la velocidad del dinero es constante, luego un aumento en la cantidad de dinero debe estar acompañado de un incremento en $PY$. En la medida que el cambio en $Y$ sea menor al cambio en $M$ entonces $P$ debe aumentar. De ahí que suela decirse que tiende a haber una relación directa entre la tasa de crecimiento del dinero y la tasa a la que crecen los precios, es decir la inflación. 
+
+Antes de examinar la relación empírica entre el dinero y la inflación, hay que definir como se mide $M$. En términos prácticos se distinguen diferentes [agregados monetarios](Consultar https://www.banrep.gov.co/sites/default/files/guia-metodologica-agregados-y-cartera.pdf).
+
+- Base monetaria: Saldo de dinero emitido por el Banco Central. Monedas y billetes en poder del público más la reserva bancaria. Esta última es el el saldo de billetes y monedas en caja y el saldo que mantienen las entidades depositarias en el Banco Central para cumplir el requisito de encaje
+
+- M1: agregado que incluye el efectivo y los depósitos en cuenta corriente
+
+- M2: agregado que incluye M1 y las cuentas de ahorro
+
+De las definiciones anteriores debe quedar claro que el banco central influye de manera directa la base monetaria, y de manera indirecta los demás agregados, al fin y al cabo los saldos del público en cuentas corrientes y de ahorro en los bancos comerciales dependen de decisiones que trascienden la discrecionalidad de la autoridad monetaria. 
+
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE,fig.cap="Crecimiento anual agregados monetarios. Fuente: BanRep"}
+library(readxl)
+library(ggplot2)
+library(lubridate)
+library(plotly)
+library(ggpubr)
+agregados <- read_excel("agregados.xlsx")
+agregados<-na.omit(agregados)
+plot.agregados<-ggplot(agregados, aes(x=as.Date(fecha)))+geom_line(aes(y=m0var,colour="M0"))+geom_line(aes(y=m1var,colour="M1"))+geom_line(aes(y=m2var,colour="M2"))+scale_color_manual("",breaks=c("M0","M1","M2"),values=c("M0"="black","M1"="#CC0000","M2"="#009999"))+xlab("Fecha")+ylab("Variación anual")+theme_bw() 
+plot.agregados<-ggplotly(plot.agregados)
+plot.agregados
+```
+
+
+Si comparamos la evolución de la base monetaria con la inflación en los último 20 años vemos que no hay una relación evidente entre las dos. En los últimos años el aumento en la tasa de crecimiento de la cantidad de dinero no se ha trasladado a una mayor inflación. Una de las cuestiones de debate hoy día es si la expansión monetaria de los últimos años a nivel global terminará reflejándose en inflaciones más altas. 
+
+```{r,echo=FALSE, message=FALSE, warning=FALSE,fig.cap="Crecimiento del dinero e inflación"}
+agregados$date<-as.Date(agregados$fecha)
+ag2000<-agregados[agregados$date>"1999-12-31",]
+plot.ag<-ggplot(ag2000)+geom_line(aes(x=date,y=m0var),color="black")+xlab("Fecha")+ylab("Variación anual")+theme_bw()
+plot.inf<-ggplot(ag2000)+geom_line(aes(x=date,y=inf),color="#000099")+xlab("Fecha")+ylab("Inflación anual")+theme_bw()
+plot.aginf<-ggarrange(plot.ag,plot.inf,ncol=1,nrow=2)
+plot.aginf
+
+```
+
+¿Cómo se crea le dinero en una economía donde este es fiduciario? La visión económica estándar afirma que la oferta de dinero es exógena. Esto es, que está determinada por la decisión discrecional de la autoridad monetaria. 
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+library(flextable)
+Activos<-c("Activos externos netos", "Papeles del gobierno", "Operaciones del BC (neto)")
+Pasivos<-c("Efectivo","Reservas bancarias","" )
+bsbc<-data.frame(Pasivos,Activos)
+bsbcft<-flextable(bsbc)
+bsbcft<-set_caption(bsbcft,caption="Balance Banco Central",style="Table Caption")
+bsbcft
+```
+
+Toda operación que aumente el pasivo del Banco Central significa un aumento de la base monetaria. Los mecanismos usuales suelen ser los siguiente
+
+1. El banco central compra bonos del gobierno, TES, en el mercado secundario. El banco central incrementa los activos, el banco que vende el bono recibe el pago y lo deposita en la su cuenta en el banco central, aumentando así las reservas bancarias
+
+2. Compra de reservas internacionales.
+
+3. Operaciones del BC con bancos comerciales. Son operaciones de mercado abierto que pueden ser transitorias o permanentes. En las transitorias el Banco Central compra con pacto de reventa títulos de deuda, TES. Si son permanentes, la compra de títulos no tiene pacto de reventa y por lo tanto la liquidez queda de forma permanente en la economía. En ocasiones el Banco Central presta directamente a los bancos y cobra una tasa de interés. esto último se conoce como el prestamista de última instancia y es un rol muy importante en momentos de crisis financieras.
+
+Para la contracción monetaria las operaciones son las contrarias. 
+
+Como hay una parte de las reservas bancarias que los bancos comerciales mantienen por mandato de la autoridad monetaria, entonces toda suma de reservas por encima de las requeridas son susceptibles de ser usadas para otorgar crédito. Al otorgar crédito los bancos comerciales crean dinero, reflejado en los agregados M1 y M2. 
+
+## Política monetaria: estrategia IO
+
+Como se mencionó anteriormente, el BanRep buscar cumplir su mandato de control de la inflación a través de una estrategia consistente en comprometerse a utilizar las herramientas a su disposición para lograr una meta de inflación. Actualmente la meta es mantener la inflación el rango 2%-4% con un objetivo puntual de 3%. Para alcanzarlo la principal herramienta utilizada es la tasa de interés de intervención, la cual no es otra cosa que la tasa mínima que le cobra el BanRep a las entidades financieras por la liquidez que le suministra. Se espera que esta tasa se transmita a las demás tasas de interés de la economía. 
+
+```{r,echo=FALSE, message=FALSE, warning=FALSE,fig.cap="Inflación y tasa de intervención"}
+library(tidyverse)
+tip <- read_excel("tip.xlsx")
+tip$date<-as.Date(tip$fecha)
+tip$mes<-format(tip$date,"%m")
+tip$year<-format(tip$date,"%Y")
+tipm<-tip%>%group_by(year,mes)%>%summarise(tipm=mean(tip))
+library(lubridate)
+tipm$date<-make_date(year=tipm$year,month=tipm$mes)
+tipm<-tipm[tipm$date<"2021-03-01",]
+ag99<-agregados[agregados$date>"1998-12-31",]
+ag99$mes<-format(ag99$date,"%m")
+ag99$year<-format(ag99$date,"%Y")
+
+tipag<-merge(ag99,tipm,by=c("year","mes"),all=TRUE)
+tipag<-subset(tipag,select=c(date.y,inf,tipm))
+tipag<-tipag[tipag$date.y>"2000-12-01",]
+tipag$inf<-tipag$inf*100
+
+plot.tip<-ggplot(tipag,aes(x=date.y))+geom_line(aes(y=tipm,colour="TIP"))+geom_line(aes(y=inf,colour="Inflación"))+scale_color_manual("",breaks=c("TIP","Inflación"),values=c("TIP"="black","Inflación"="#CC0000"))+
+  theme_bw()+xlab("Fecha")+ylab("%")
+plot.tip<-ggplotly(plot.tip)
+plot.tip
+  
+```
 

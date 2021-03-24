@@ -3,6 +3,8 @@ fig:unnamed-chunk-2
 tab:unnamed-chunk-1
 tab:unnamed-chunk-3
 fig:unnamed-chunk-4
+fig:unnamed-chunk-3
+tab:unnamed-chunk-5
 introducción
 crecimiento
 introducción-1
@@ -26,3 +28,5 @@ introducción-2
 qué-es-el-dinero
 nivel-de-precios-ipc-e-inflación
 dinero-y-precios-1
+política-monetaria-estrategia-io
+fig:unnamed-chunk-6

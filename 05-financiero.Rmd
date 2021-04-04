@@ -1,0 +1,41 @@
+# Sistema financiero
+
+## Introducción 
+
+En este módulo estudiaremos el rol del sistema financiero en la economía, describiremos su configuración en Colombia, y reflexionaremos sobre la regulación y las crisis.
+
+## ¿Qué es y cuál es su papel?
+
+Está conformado por un grupo de entidades que facilitan la canalización de recursos de aquellos que en un momento dado del tiempo tienen en exceso hacia aquellos que los necesitan. Una idea estándar es que transforma el ahorro en inversión. En este sentido, el sistema financiero es un intermediario entre ahorradores e inversionistas. Así, un intermediario del sistema financiero recoge los excedentes de los ahorradores y los asigna hacia aquellos que necesitan financiar sus proyectos y/o actividades. Al centralizar este tipo de información se facilita la canalización del ahorro a la inversión. Además, al asignar los recursos entre diversos solicitantes el intermediario gestiona el riesgo de crédito. La intermediación genera ganancias a partir del diferencial entre la tasa de interés a la que le presta y la tasa de interés a la que se fondea. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Margen de Intermediación Ex-ante. Fuente: BanRep. Captación: DTF 90 días"}
+library(readxl)
+library(ggplot2)
+library(plotly)
+margen <- read_excel("margen.xlsx")
+plot.margen<-ggplot(margen, aes(x=as.Date(Fecha)))+geom_line(aes(y=colocacion,colour="Colocación"))+geom_line(aes(y=dtf90,colour="Captación"))+scale_color_manual("",breaks=c("Colocación","Captación"),values=c("Colocación"="black","Captación"="#CC0000"))+xlab("Fecha")+ylab("Tasa")+theme_bw() 
+plot.margen<-ggplotly(plot.margen)
+plot.margen
+
+
+```
+
+La descripción anterior, sin embargo, no recoge la diversidad de actividades que desarrollan las entidades financieras ni las interacciones con el resto de la economía. Además de intermediar, las entidades financieras también administran recursos propios y de terceros, y prestan asesoría especializada en la administración de recursos ^[https://publicaciones.banrepcultural.org/index.php/banrep/article/view/8421/8820]. 
+
+```{r, echo=FALSE, fig.cap="Estructura del Sistema Financiero Colombiano"}
+knitr::include_graphics("sisfincol.png")
+```
+
+Las actividades financieras trascienden el otorgamiento tradicional de crédito. La administración de recursos propios y de terceros implican que las entidades financieras están expuestas tanto a la variación en los precios de los activos financieros, riesgo de mercado, como a las condiciones de liquidez de la economía.
+
+-Riesgo de mercado: Las entidades financieras tienen en sus portafolios activos financieros y por lo tanto pueden experimentar pérdidas o ganancias por la desvalorización o valorización de estos. Si los recursos son administrados, la pérdida se traslada al tercero, por ejemplo en un menor saldo en la cuenta de ahorro pensional individual. 
+
+-Riesgo de liquidez: tiene que ver con la capacidad que tenga la entidad de cubrir sus necesidades de liquidez a corto plazo. 
+
+Ahora, en términos de los diferentes mercados en los que operan las entidades financieras, podemos distinguir los siguientes
+
+- Mercado Monetario: allí se negocian instrumentos financieros con plazos de cumplimiento inferior a un      año. Los principales instrumentos son títulos de deuda pública de corto plazo, certificados de depósito,   y prestamos interbancarios. A través de estos instrumentos se transfiere liquidez de quienes la tienen en   exceso hacia aquellos que la necesitan
+
+- Mercado de capitales: acá se tranzan principalmente acciones, bonos, y derivados. Además de permitir la    movilización de recursos de agentes ahorradores hacia agentes que quieren financiar algún proyecto, estos   mercados se usan en la administración de portafolios para especular y/o manejar riesgos. 
+
+- Mercado de divisas: las entidades que operan acá intercambian monedas, bien sea en el mercado spot, de     cumplimiento inmediato, o a través de derivados, forward y non-delivery forward. Además de permitir a los   agentes cubrir sus necesidades de moneda extranjera, en estos mercados también se especula a favor o en    contra de la moneda, especialmente por medio de los derivados. 

@@ -93,7 +93,7 @@ plot.agregados
 ```
 
 
-Si comparamos la evolución de la base monetaria con la inflación en los último 20 años vemos que no hay una relación evidente entre las dos. En los últimos años el aumento en la tasa de crecimiento de la cantidad de dinero no se ha trasladado a una mayor inflación. Una de las cuestiones de debate hoy día es si la expansión monetaria de los últimos años a nivel global terminará reflejándose en inflaciones más altas. 
+Si comparamos la evolución de la base monetaria con la inflación en los último 20 años vemos que no hay una relación evidente entre las dos. En los últimos años el aumento en la tasa de crecimiento de la cantidad de dinero no se ha trasladado a una mayor inflación. Una de las cuestiones de debate hoy día es si la expansión monetaria de los últimos años a nivel global terminará reflejándose en inflaciones más altas ¿Quiere decir esto que no hay relación entre la tasa de crecimiento del dinero y la inflación? No, de ninguna manera, lo que indica es que la relación no es lo suficientemente estable como para ser utilizada como estrategia de política monetaria. 
 
 ```{r,echo=FALSE, message=FALSE, warning=FALSE,fig.cap="Crecimiento del dinero e inflación"}
 agregados$date<-as.Date(agregados$fecha)
@@ -113,6 +113,7 @@ Activos<-c("Activos externos netos", "Papeles del gobierno", "Operaciones del BC
 Pasivos<-c("Efectivo","Reservas bancarias","" )
 bsbc<-data.frame(Pasivos,Activos)
 bsbcft<-flextable(bsbc)
+bsbcft<-set_table_properties(bsbcft, layout = "autofit", width = .5)
 bsbcft<-set_caption(bsbcft,caption="Balance Banco Central",style="Table Caption")
 bsbcft
 ```
@@ -158,4 +159,26 @@ plot.tip<-ggplotly(plot.tip)
 plot.tip
   
 ```
+### Tasa de interés de intervención, expectativas, e inflación
 
+
+¿Por qué si la inflación aumenta o amenaza con estar por encima de la meta el Banco de le República sube la tasa de interés de intervención? Empecemos por considerar las razones por las cuales la inflación puede aumentar
+
+- Choques de oferta: sucede algo que constriñe temporalmente la capacidad de oferta a los precios           prevalecientes
+
+  - Fenómenos climáticos: afecta la capacidad de producción de alimentos
+  - Aumento en el precio del petróleo o algún otro commodity fundamental: encarece costos de producción
+  - Depreciación de la moneda: incrementa el precio en pesos de bienes importados, muchos de ellos son        insumos para la producción 
+  - Paro camionero o alguna otra disrupción en la cadena de suministro
+  - Desarollos tecnológicos
+  
+-Choques de demanda: cambia el patrón de gasto de los agentes
+
+  - Cambio en las expectativas de los consumidores y/o las firmas
+  - Caída en el precio de las viviendas, la riqueza de los hogares disminuye
+  - Modificaciones tributarias afectan el ingreso disponible
+  - Cambio en el gasto público
+  - Recesión en un país destino de nuestras exportaciones
+  
+De lo anterior podemos ver que son múltiples los factores que afectan la dinámica inflacionaria, entonces ¿Cómo es posible que un Banco Central pueda controlar tantas cosas diferentes con la tasa de interés de intervención? La historia, de manera general y resumida, es algo así. Cuando el Banco Central sube la tasa de interés encarece el acceso a liquidez de los bancos comerciales, lo que significa que para estos fondear crédito es más costoso, ello presiona al alza las demás tasas de interés de la economía, y en consecuencia los hogares tienden a consumir menos y las firmas a reducir la inversión. De forma simultánea, con su acción el Banco Central envía la señal, a los agentes económicos, de que está comprometido a hacer lo que se requiera para mantener la inflación bajo control. Así, aún cuando el choque sea de oferta, y por lo tanto la tasa de interés no ataque la raíz de la presión inflacionaria, la señal de compromiso buscar anclar las expectativas de inflación. Si los agentes piensan "Sí, hoy está aumentando la inflación, pero esto es solo temporal y volverá a ser baja y estable". Cuando las expectativas no están ancladas, entonces la perspectiva de que esta se incrementará puede dar lugar a incrementos en el presente, con lo cual se puede generar una dinámica de aceleración persistente de la inflación. 
+  

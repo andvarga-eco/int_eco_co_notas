@@ -5,6 +5,7 @@ tab:unnamed-chunk-3
 fig:unnamed-chunk-4
 fig:unnamed-chunk-3
 tab:unnamed-chunk-5
+fig:unnamed-chunk-6
 introducción
 crecimiento
 introducción-1
@@ -29,4 +30,7 @@ qué-es-el-dinero
 nivel-de-precios-ipc-e-inflación
 dinero-y-precios-1
 política-monetaria-estrategia-io
-fig:unnamed-chunk-6
+tasa-de-interés-de-intervención-expectativas-e-inflación
+sistema-financiero
+introducción-3
+qué-es-y-cuál-es-su-papel

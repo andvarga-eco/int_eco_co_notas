@@ -39,3 +39,16 @@ Ahora, en términos de los diferentes mercados en los que operan las entidades f
 - Mercado de capitales: acá se tranzan principalmente acciones, bonos, y derivados. Además de permitir la    movilización de recursos de agentes ahorradores hacia agentes que quieren financiar algún proyecto, estos   mercados se usan en la administración de portafolios para especular y/o manejar riesgos. 
 
 - Mercado de divisas: las entidades que operan acá intercambian monedas, bien sea en el mercado spot, de     cumplimiento inmediato, o a través de derivados, forward y non-delivery forward. Además de permitir a los   agentes cubrir sus necesidades de moneda extranjera, en estos mercados también se especula a favor o en    contra de la moneda, especialmente por medio de los derivados. 
+
+## Evolución
+
+
+El sistema financiero colombiano ha pasado de ser uno de banca especializada a uno de multibanca. Esto quiere decir que las entidades pueden ofrecer múltiples productos financieros. De esta manera, entidades asociadas pueden ofrecer a sus clientes los productos tradicionales de la banca comercial, como depósitos en cuenta de ahorros y créditos, sino también servicios de banca de inversión. En esta última la entidad actúa como intermediaria entre los inversionistas y las corporaciones que requieren capital. Así, por ejemplo ayudan en la estructuración de emisión de bonos o acciones. También prestan servicios de asesoría para la las operaciones de fusiones y adquisiciones, el *trading* en los mercados secundarios de capitales, el manejo de portafolios, entre otros. 
+
+El giro hacia la multibanca o banca universal ha estado motivado por el aprovechamiento de las economías de escala y alcance. 
+
+- Economías de escala: existen cuando el costo medio de producción disminuye en la medida que el volumen de producción aumenta
+
+- Economías de alcance: se da cuando el costo total de producción cuando se producen un rango variado de productos es menor a si se produjeran individualmente. La tecnología necesaria para producir un producto financiero también sirve para producir otro producto financiero, luego es más barato producirlos conjuntamente que por separado
+
+El giro hacia la banca universal no ha estado exento de críticas y preocupaciones. Se argumenta que esto puede, y ha dado lugar, a instituciones financieras demasiado grandes. Cuando una firma es demasiado grande, entonces empieza es más probable que sea rescatada por el gobierno si amenaza con quebrarse. Hay un subsidio implícito y un incentivo a comportamientos derivados del riesgo moral. Embarcarse en actividades más riesgosas que ponen comprometen la estabilidad del sistema financiero y de la economía.

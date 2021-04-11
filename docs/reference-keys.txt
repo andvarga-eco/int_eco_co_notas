@@ -6,6 +6,7 @@ fig:unnamed-chunk-4
 fig:unnamed-chunk-3
 tab:unnamed-chunk-5
 fig:unnamed-chunk-6
+fig:unnamed-chunk-5
 introducción
 crecimiento
 introducción-1
@@ -35,3 +36,4 @@ sistema-financiero
 introducción-3
 qué-es-y-cuál-es-su-papel
 evolución
+estabilidad-del-sistema

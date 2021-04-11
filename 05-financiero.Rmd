@@ -34,9 +34,9 @@ Las actividades financieras trascienden el otorgamiento tradicional de crédito.
 
 Ahora, en términos de los diferentes mercados en los que operan las entidades financieras, podemos distinguir los siguientes
 
-- Mercado Monetario: allí se negocian instrumentos financieros con plazos de cumplimiento inferior a un      año. Los principales instrumentos son títulos de deuda pública de corto plazo, certificados de depósito,   y prestamos interbancarios. A través de estos instrumentos se transfiere liquidez de quienes la tienen en   exceso hacia aquellos que la necesitan
+- Mercado Monetario: allí se negocian instrumentos financieros con plazos de cumplimiento inferior a un año. Los principales instrumentos son títulos de deuda pública de corto plazo, certificados de depósito, y prestamos interbancarios. A través de estos instrumentos se transfiere liquidez de quienes la tienen en exceso hacia aquellos que la necesitan
 
-- Mercado de capitales: acá se tranzan principalmente acciones, bonos, y derivados. Además de permitir la    movilización de recursos de agentes ahorradores hacia agentes que quieren financiar algún proyecto, estos   mercados se usan en la administración de portafolios para especular y/o manejar riesgos. 
+- Mercado de capitales: acá se tranzan principalmente acciones, bonos, y derivados. Además de permitir la movilización de recursos de agentes ahorradores hacia agentes que quieren financiar algún proyecto, estos   mercados se usan en la administración de portafolios para especular y/o manejar riesgos. 
 
 - Mercado de divisas: las entidades que operan acá intercambian monedas, bien sea en el mercado spot, de     cumplimiento inmediato, o a través de derivados, forward y non-delivery forward. Además de permitir a los   agentes cubrir sus necesidades de moneda extranjera, en estos mercados también se especula a favor o en    contra de la moneda, especialmente por medio de los derivados. 
 
@@ -49,6 +49,33 @@ El giro hacia la multibanca o banca universal ha estado motivado por el aprovech
 
 - Economías de escala: existen cuando el costo medio de producción disminuye en la medida que el volumen de producción aumenta
 
-- Economías de alcance: se da cuando el costo total de producción cuando se producen un rango variado de productos es menor a si se produjeran individualmente. La tecnología necesaria para producir un producto financiero también sirve para producir otro producto financiero, luego es más barato producirlos conjuntamente que por separado
+- Economías de alcance: el costo total de producción cuando se producen un rango variado de productos es menor a si se produjeran individualmente. La tecnología necesaria para producir un producto financiero también sirve para producir otro producto financiero, luego es más barato producirlos conjuntamente que por separado
 
-El giro hacia la banca universal no ha estado exento de críticas y preocupaciones. Se argumenta que esto puede, y ha dado lugar, a instituciones financieras demasiado grandes. Cuando una firma es demasiado grande, entonces empieza es más probable que sea rescatada por el gobierno si amenaza con quebrarse. Hay un subsidio implícito y un incentivo a comportamientos derivados del riesgo moral. Embarcarse en actividades más riesgosas que ponen comprometen la estabilidad del sistema financiero y de la economía.
+El giro hacia la banca universal no ha estado exento de críticas y preocupaciones. Se argumenta que esto puede, y ha dado lugar, a instituciones financieras demasiado grandes. Cuando una firma es demasiado grande, entonces es más probable que sea rescatada por el gobierno si amenaza con quebrarse. Hay un subsidio implícito y un incentivo a comportamientos derivados del riesgo moral. Embarcarse en actividades más riesgosas que ponen comprometen la estabilidad del sistema financiero y de la economía.
+
+En el caso colombiano, si bien hay un número importante de entidades financieras en cada uno de los diferentes mercados, muchas de ellas pertenecen a un mismo conglomerado financiero, pues entre ellas existen vínculos de propiedad ligados a un mismo beneficiario real controlante. Algunos de los conglomerados más importanes son: Grupo Aval, Bancolombia, Sociedades Bolívar, Fundación Social, entre otros. 
+
+## Estabilidad del sistema
+
+Si bien las actividades financieras y de seguros representan tan solo el 4.5% del PIB, su desempeño es muy importante para el conjunto de la economía. Esto se aprecia con mucha claridad en épocas en las que la fragilidad del sistema financiero compromete al conjunto de la economía. Se sugiere la lectura de la unidad 17 del libro [The Economy](https://www.core-econ.org/the-economy/book/text/17.html#1710-the-financial-crisis-and-the-great-recession)
+
+```{r,echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Crédito privado como proporción del PIB. Fuente: Banco Mundial. World Development Indicators"}
+ipvu <- read_excel("ipvu.xlsx")
+plotcred<-ggplot(ipvu,aes(x=Año,y=credit))+geom_line()+geom_area(fill="#69b3a2", alpha=0.5)+geom_line(color="#69b3a2")+theme_bw()+ylab("Crédito/PIB")
+plotcred<-ggplotly(plotcred)
+plotcred
+
+```
+
+```{r,echo=FALSE, message=FALSE, warning=FALSE, fig.cap="índice de precios de la vivienda usada, real. Fuente: BanRep"}
+plotipvu<-ggplot(ipvu,aes(x=Año,y=ipvureal))+geom_line()+geom_area(fill="#FF9900", alpha=0.5)+geom_line(color="#FF9900")+theme_bw()+ylab("índice precios de la vivienda usada, real")
+plotipvu<-ggplotly(plotipvu)
+plotipvu
+```
+En el caso colombiano, la crisis de finales de los 90s tuvo ver con un endeudamiento rápido por parte de los hogares, las empresas, y el gobierno. De acuerdo a @caballero2005 el crecimiento económico financiado con endeudamiento interno y externo propició las condiciones de vulnerabilidad para que choques exógenos, crisis financieras externas, desencadenara la crisis económica que vivió el país. Con el deterioro de las condiciones económicas, aumento de las tasas de interés y del desempleo, la cartera vencida como proporción de la cartera total creció de manera acelerada durante 1998, alcanzando valor del 16%. Esto fue especialmente cierto para la cartera hipotecaria, afectando fuertemente a los bancos hipotecarios y otras entidades, muchas de las cuales tuvieron que ser intervenidas y liquidadas.
+
+```{r, echo=FALSE, fig.cap="Red de Seguridad del Sistema Financiero"}
+knitr::include_graphics("rsf.png")
+```
+
+

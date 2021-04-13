@@ -1,0 +1,75 @@
+# Sector Externo
+
+## Introducción
+
+En este módulo abordaremos los siguientes temas
+
+- Patrón de Comercio: ¿Qué exportamos? ¿Qué importamos? ¿Con quienes comerciamos?
+
+- Los efectos económicos y sobre el bienestar del libre comercio
+
+- ¿De qué depende el volumen del comercio y su composición?
+
+- Balanza de Pagos
+
+## Evolución del comercio internacional y patrón de comercio para Colombia
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Evolución del comercio exterior colombiano (%PIB). Fuente: Banco Mundial"}
+library(readxl)
+library(ggplot2)
+library(plotly)
+tradepibcol <- read_excel("tradepibcol.xlsx")
+trade<-ggplot(tradepibcol,aes(x=year))+geom_line(aes(y=trade,colour="Total"))+geom_line(aes(y=exports,colour="Exportaciones"))+geom_line(aes(y=imports,colour="Importaciones"))+
+  scale_color_manual("",breaks=c("Total","Exportaciones","Importaciones"),values=c("Total"="black","Exportaciones"="#CC0000","Importaciones"="#009999"))+xlab("Año")+scale_y_continuous("%PIB")+geom_vline(xintercept=1981,color="#000033",linetype="dotted")+
+  geom_vline(xintercept=1995,color="#000033",linetype="dotted")+theme_bw() +
+  annotate("rect", xmin = 1990, xmax = 1994, ymin = 10, ymax = 40, alpha = .5)
+trade<-ggplotly(trade)
+trade
+```
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las exportaciones de mercancias. Fuente: OMC"}
+library(tidyr)
+xcolanual <- read_excel("xcolanual.xlsx")
+xagg<-subset(xcolanual,select=c("year","AG","MI","MA"),year<2020)
+xagglong<-xagg%>%pivot_longer(c("AG","MI","MA"))
+xagglong$Sector<-xagglong$name
+
+ggplot(xagglong,aes(x=factor(year),y=value,fill=Sector))+geom_bar(position="fill",stat="identity")+ylab("Porcentaje")+
+xlab("Año")+scale_x_discrete(breaks=c("1980","1985","1990","1995","2000","2005","2010","2015","2019"))
+```
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las exportaciones manufactureras.Fuente: OMC"}
+xman<-subset(xcolanual,select=c("year","MAIS","MACH","MACHPH","MAMT","MAMTOF","MAMTOTEP","MAMTOTTL","MAMTOTIC","MAMTTE","MAMTAU","MATE","MACL"),year>1990&year<2020)
+xmalong<-xman%>%pivot_longer(c("MAIS","MACH","MAMT","MATE","MACL"))
+xmalong$Sector<-xmalong$name
+
+xmaplot<-ggplot(xmalong,aes(x=factor(year),y=value,fill=Sector))+geom_bar(position="fill",stat="identity")+ylab("Porcentaje")+
+xlab("Año")+scale_x_discrete(breaks=c("1980","1985","1990","1995","2000","2005","2010","2015","2019"))
+xmaplot<-ggplotly(xmaplot)
+xmaplot
+
+```
+
+
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las importaciones de mercancias.Fuente: OMC"}
+mcolanual <- read_excel("mcolanual.xlsx")
+magg<-subset(mcolanual,select=c("year","AG","MI","MA"),year<2020&year>1979)
+magglong<-magg%>%pivot_longer(c("AG","MI","MA"))
+magglong$Sector<-magglong$name
+
+ggplot(magglong,aes(x=factor(year),y=value,fill=Sector))+geom_bar(position="fill",stat="identity")+ylab("Porcentaje")+
+xlab("Año")+scale_x_discrete(breaks=c("1980","1985","1990","1995","2000","2005","2010","2015","2019"))
+
+```
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las importaciones manufactureras.Fuente: OMC"}
+mman<-subset(mcolanual,select=c("year","MAIS","MACH","MACHPH","MAMT","MAMTOF","MAMTOTEP","MAMTOTTL","MAMTOTIC","MAMTTE","MAMTAU","MATE","MACL"),year>1990&year<2020)
+mmalong<-mman%>%pivot_longer(c("MAIS","MACH","MAMT","MATE","MACL"))
+mmalong$Sector<-mmalong$name
+
+mmaplot<-ggplot(mmalong,aes(x=factor(year),y=value,fill=Sector))+geom_bar(position="fill",stat="identity")+ylab("Porcentaje")+
+xlab("Año")+scale_x_discrete(breaks=c("1980","1985","1990","1995","2000","2005","2010","2015","2019"))
+mmaplot<-ggplotly(mmaplot)
+mmaplot
+```
+

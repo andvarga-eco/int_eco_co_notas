@@ -27,6 +27,11 @@ trade<-ggplotly(trade)
 trade
 ```
 
+Se ha argumentado recientemente que la política comercial colombiana ha sido principalmente proteccionista. Así, @garcia2019 afirma que para el periodo comprendido entre 1950 y 2013 el proteccionismo ha imperado, particularmente entre 1950 y 1970. Afirman también estos autores que la llamada *apertura* de los años 90s del S.XX fue realmente de un alcance menor al que se le suele atribuir. Para @villar2007, el proteccionismo prevaleciente en Colombia durante el S.XX fue resultado del bajo desarrollo de una base exportadora diversificada en un contexto en el cual el país no contaba con financiación externa suficiente. De acuerdo a esta explicación, el aumento del indicador de apertura comercial, $\dfrac{X+M}{PIB}$, del gráfico anterior se debería fundamentalmente a los ciclos en los valores de las exportaciones de café, petróleo y otros minerales, y no tanto a decisiones de política comercial. 
+
+En la medida que aumentan los precios de los principales productos de exportación es posible reducir aranceles y permitir una mayor entrada de importaciones, las cuales podrían ser pagadas con las divisas obtenidas por las exportaciones. Esto sería especialmente cierto hasta 1990. A comienzos de 1990 el arancel nominal promedio descendió rápidamente del 40% al 11%. Note que durante este periodo, barra gris en la gráfica precedente, las importaciones pasan del 13% al 20% del PIB, al tiempo que las exportaciones se reducen. Además de los aranceles, es importante tener en cuenta la evolución de medidas cuantitativas de protección, como las licencias de importación. Por ejemplo, entre 1983 y 1985 de un universo de 5019 partidas arancelarias, 4500 estaban restringidas, mientras que para finales de 1990 este número era de 168 partidas con restricción, de un total de 5163. Sin embargo, como lo exponen @garcia2019, el desmonte de la protección arancelaria y de las medidas cuantitativas, vino a ser reemplazada por la aparición de múltiples medidas no arancelarias, MNA, como normas técnicas y medidas sanitarias, que se emiten vía resoluciones y decretos por parte de múltiples entidades del Estado.
+
+
 ```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las exportaciones de mercancias. Fuente: OMC"}
 library(tidyr)
 xcolanual <- read_excel("xcolanual.xlsx")
@@ -39,6 +44,22 @@ xlab("Año")+scale_x_discrete(breaks=c("1980","1985","1990","1995","2000","2005"
 xplot<-ggplotly(xplot)
 xplot
 ```
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las importaciones de mercancias.Fuente: OMC"}
+mcolanual <- read_excel("mcolanual.xlsx")
+magg<-subset(mcolanual,select=c("year","AG","MI","MA"),year<2020&year>1979)
+magglong<-magg%>%pivot_longer(c("AG","MI","MA"))
+magglong$Sector<-magglong$name
+
+mplot<-ggplot(magglong,aes(x=factor(year),y=value,fill=Sector))+geom_bar(position="fill",stat="identity")+ylab("Porcentaje")+
+xlab("Año")+scale_x_discrete(breaks=c("1980","1985","1990","1995","2000","2005","2010","2015","2019"))
+mplot<-ggplotly(mplot)
+mplot
+```
+
+
+En términos de la composición del comercio exterior, se observa claramente que mientras por el lado de las exportaciones se ha dado un cambio importante desde 1980, por el de las importaciones ha habido una estabilidad. En el primer caso, las ventas al exterior de hidrocarburos y minerales pasó del 3% en 1980 hasta un máximo de 70% en los años 2012 y 2013. Esta recomposición se ha dado principalmente a costa de las exportaciones agropecuarias principalmente, mientras que las manufactureras oscilan entre el 20% y el 40% en todo el periodo. En el caso de las importaciones, alrededor de dos terceras partes son manufactureras. Note que la composición del comercio total indica que tendemos a exportar unos tipos de bienes y a importar otros tipos de bienes. No obstante, la composición de manufacturas sugiere que hay flujos de exportaciones e importaciones en bienes similares. A esto último se le conoce como comercio intra-industrial. Un patrón importante es que este último de comercio tiende a tener lugar aún entre países similares. 
+
 
 ```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las exportaciones manufactureras.Fuente: OMC"}
 xman<-subset(xcolanual,select=c("year","MAIS","MACH","MACHPH","MAMT","MAMTOF","MAMTOTEP","MAMTOTTL","MAMTOTIC","MAMTTE","MAMTAU","MATE","MACL"),year>1990&year<2020)
@@ -54,17 +75,7 @@ xmaplot
 
 
 
-```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las importaciones de mercancias.Fuente: OMC"}
-mcolanual <- read_excel("mcolanual.xlsx")
-magg<-subset(mcolanual,select=c("year","AG","MI","MA"),year<2020&year>1979)
-magglong<-magg%>%pivot_longer(c("AG","MI","MA"))
-magglong$Sector<-magglong$name
 
-mplot<-ggplot(magglong,aes(x=factor(year),y=value,fill=Sector))+geom_bar(position="fill",stat="identity")+ylab("Porcentaje")+
-xlab("Año")+scale_x_discrete(breaks=c("1980","1985","1990","1995","2000","2005","2010","2015","2019"))
-mplot<-ggplotly(mplot)
-mplot
-```
 ```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Composición de las importaciones manufactureras.Fuente: OMC"}
 mman<-subset(mcolanual,select=c("year","MAIS","MACH","MACHPH","MAMT","MAMTOF","MAMTOTEP","MAMTOTTL","MAMTOTIC","MAMTTE","MAMTAU","MATE","MACL"),year>1990&year<2020)
 mmalong<-mman%>%pivot_longer(c("MAIS","MACH","MAMT","MATE","MACL"))
@@ -76,3 +87,16 @@ mmaplot<-ggplotly(mmaplot)
 mmaplot
 ```
 
+### Ejercicio
+
+Ingrese al portal [The observatory of economic complexity](https://oec.world/en) y busque Colombia. 
+
+1. Describa el patrón exportaciones para los años 2000 y 2019, a nivel de agregación HS4:
+  - Principales productos de exportación
+  - Principales países de destino
+  - Principales productos para los 5 principales países de destino
+
+2. Describa el patrón importaciones para los años 2000 y 2019, a nivel de agregación HS4:
+  - Principales productos de importación
+  - Principales países de origen
+  - Principales productos para los 5 principales países de origen

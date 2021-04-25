@@ -115,7 +115,7 @@ Como hay servicios que no son transportables, por ejemplo un corte de cabello o 
 
 4. Presencia de personas físicas: cuando un particular se encuentra en el extranjero para prestar el servicio. Por ejemplo un ingeniero que viaja a supervisar una obra, o va a brindar asistencia técnica
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE, fig.cap="Comercio de Servicios 2007-2020. Fuente: OMC"}
 
 xserv<-read_excel("C:/Users/andre/Google Drive/Uninorte/Uninorte-docencia/bookdown/intro_eco_col/int_eco_co_notas/xserv.xlsx")
 xserv$trades<-xserv$xs+xserv$ms

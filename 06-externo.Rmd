@@ -100,3 +100,42 @@ Ingrese al portal [The observatory of economic complexity](https://oec.world/en)
   - Principales productos de importación
   - Principales países de origen
   - Principales productos para los 5 principales países de origen
+  
+### Comercio de servicios
+
+Los servicios se entienden como el resultado de una actividad de producción que cambia las condiciones de las unidades que los consumen o facilita le intercambio de productos o activos financieros. Estos se dividen en servicios de transformación y servicios de margen. Los primeros corresponden a aquellos en los que hay cambios en las condiciones de los bienes de consumo, por ejemplo transportándolos o reparándolos, o cambios en las condiciones físicas, ej. tratamiento médico, o mentales de las personas, ej. enseñanza. Los servicios de margen se producen cuando un agente facilita el traspaso de la propiedad de bienes, productos que captan conocimientos, activos financieros, entre dos o más agentes. 
+
+Como hay servicios que no son transportables, por ejemplo un corte de cabello o el alojamiento en hoteles, sino que requieren de la proximidad física del proveedor y el consumidor, entonces el proveedor o el consumidor debe desplazarse hasta donde está la otra parte de la transacción. Debido a esto, el comercio internacional de servicios distingue entre los modos de suministro
+
+1. Suministro transfronterizo: cada parte reside en su país, y el servicio se presta vía teléfono o internet
+
+2. Consumo en el extranjero: el consumidor consume el servicio fuera de su país de residencia. Turismo
+
+3. Presencia comercial: los proveedores establecen una filial o sucursal u oficina de representación en el país de destino, por cuyo intermedio prestan sus servicios. Por ejemplo, cuando un banco abre una filial
+
+4. Presencia de personas físicas: cuando un particular se encuentra en el extranjero para prestar el servicio. Por ejemplo un ingeniero que viaja a supervisar una obra, o va a brindar asistencia técnica
+
+```{r}
+
+xserv<-read_excel("C:/Users/andre/Google Drive/Uninorte/Uninorte-docencia/bookdown/intro_eco_col/int_eco_co_notas/xserv.xlsx")
+xserv$trades<-xserv$xs+xserv$ms
+
+tserv<-ggplot(xserv,aes(x=year))+geom_line(aes(y=trades,colour="Total"))+geom_line(aes(y=xs,colour="Exportaciones"))+geom_line(aes(y=ms,colour="Importaciones"))+
+  scale_color_manual("",breaks=c("Total","Exportaciones","Importaciones"),values=c("Total"="black","Exportaciones"="#CC0000","Importaciones"="#009999"))+xlab("Año")+scale_y_continuous("USD Millones")+theme_bw()
+tserv<-ggplotly(tserv)
+tserv
+
+```
+
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE, fig.cap="Comercio de Servicios 2020. Fuente: DANE"}
+muestraserv2020<-read_excel("C:/Users/andre/Google Drive/Uninorte/Uninorte-docencia/bookdown/intro_eco_col/int_eco_co_notas/muestraserv2020.xlsx")
+
+plots<-plot_ly(muestraserv2020,x=~catshort,y=~m2020,type="bar",name="Imp")
+plots<-plots%>%add_trace(y=~x2020,name="Exp")
+plots<-plots%>%layout(xaxis=list(title="Categoría"),yaxis=list(title="USD Millones"),barmode="group")
+plots
+```
+El comercio de servicios creció de manera constante, e incluso a un ritmo más rápido que el de mercancias. En efecto, mientras en 2007 las exportaciones de servicios eran un 13% de las exportaciones totales de bienes, en 2019 esta cifra alcanzó el 24%. Si, el indicador se calcula excluyendo las exportaciones minerales e hidrocarburos, este indicador para de 21% a 56% en el mismo periodo de tiempo. En el caso de las importaciones el incremento no fue tan rápido, pues pasó de 20% a 26% entre 2007 y 2019. 
+
+Para un análisis más detallado de la composición del comercio de servicios ver la [Muestra Trimestral de Comercio Exterior de Servicios](https://www.dane.gov.co/index.php/estadisticas-por-tema/comercio-internacional/muestra-trimestral-de-comercio-exterior-de-servicios) del DANE

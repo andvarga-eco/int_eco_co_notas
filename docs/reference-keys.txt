@@ -7,6 +7,7 @@ fig:unnamed-chunk-3
 tab:unnamed-chunk-5
 fig:unnamed-chunk-6
 fig:unnamed-chunk-5
+fig:unnamed-chunk-7
 introducción
 crecimiento
 introducción-1
@@ -41,3 +42,4 @@ sector-externo
 introducción-4
 evolución-del-comercio-internacional-y-patrón-de-comercio-para-colombia
 ejercicio
+comercio-de-servicios

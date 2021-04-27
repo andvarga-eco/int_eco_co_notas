@@ -10,7 +10,6 @@ En este módulo abordaremos los siguientes temas
 
 - ¿De qué depende el volumen del comercio y su composición?
 
-- Balanza de Pagos
 
 ## Evolución del comercio internacional y patrón de comercio para Colombia
 
@@ -139,3 +138,57 @@ plots
 El comercio de servicios creció de manera constante, e incluso a un ritmo más rápido que el de mercancias. En efecto, mientras en 2007 las exportaciones de servicios eran un 13% de las exportaciones totales de bienes, en 2019 esta cifra alcanzó el 24%. Si, el indicador se calcula excluyendo las exportaciones minerales e hidrocarburos, este indicador para de 21% a 56% en el mismo periodo de tiempo. En el caso de las importaciones el incremento no fue tan rápido, pues pasó de 20% a 26% entre 2007 y 2019. 
 
 Para un análisis más detallado de la composición del comercio de servicios ver la [Muestra Trimestral de Comercio Exterior de Servicios](https://www.dane.gov.co/index.php/estadisticas-por-tema/comercio-internacional/muestra-trimestral-de-comercio-exterior-de-servicios) del DANE
+
+
+
+## Ventaja comparativa y economías de escala
+
+Un concepto poderoso, aunque no del todo intuitivo, para explicar el patrón de comercio, y además analizar su conveniencia, es el de ventaja comparativa. Este principio fue enunciado por David Ricardo en 1817 en su libro *On the principles of political economy and taxation*. Dice Ricardo en el capítulo VI
+
+>"Under a system of perfectly free commerce, each country naturally devotes its capital and labour to such employments as are most beneficial to each. This pursuit of individual advantage is admirably connected with the universal good of the whole. By stimulating industry, by rewarding ingenuity, and by using most efficaciously the peculiar powers bestowed by nature, it distributes labour most effectively and most economically: while, by increasing the general mass of productions, it diffuses general benefit, and binds together by one common tie of interest and intercourse, the universal society of nations throughout the civilized world. It is this principle which determines that wine shall be made in France and Portugal, that corn shall be grown in America and Poland, and that hardware and other goods shall be manufactured in England."
+>
+>`r tufte::quote_footer('--- David Ricardo')`
+
+
+Usemos el mismo ejemplo de Ricardo para explicar la idea. Suponga que Inglaterra necesita 100 hombres por un año de trabajo para producir la ropa que requiere, y para hacer vino necesita 120 hombres por un año. Por su parte, Portugal requiere 90 y 80, respectivamente ¿Por qué le conviene a Portugal exportar vino e importar ropa? ¿No es acaso Portugal más productivo en los dos bienes?
+
+```{r,echo=FALSE, message=FALSE, warning=FALSE}
+library(flextable)
+País<-c("Inglaterra", "Portugal")
+Vino<-c(120,80)
+Ropa<-c(100,90)
+VR<-c(1.2,0.88)
+df<-data.frame(País,Vino,Ropa,VR)
+myft<-flextable(df)
+bft<-bold(myft,i=1, part="header")
+bft<-set_caption(bft,caption="Requerimientos de trabajo por unidad de producto",style="Table Caption")
+bft
+```
+Si cada país está en autarquía debe usar sus recursos disponibles, trabajo, en la producción de los dos tipos de bienes. Sin embargo, si decide entrar en una relación de intercambio con el otro país, libre comercio, entonces puede liberar recursos en una actividad y dirigirlos hacia la otra. Si Inglaterra reduce su producción de vino en 5 unidades, entonces libera 600 unidades de trabajo y producir 6 unidades adicionales de ropa. Portugal, al importar esas 6 unidades adicionales de ropa libera 540 unidades de trabajo, con las cuales puede producir 6.75 unidades de vino
+
+```{r,echo=FALSE, message=FALSE, warning=FALSE}
+library(flextable)
+Paísp<-c("Inglaterra", "Portugal","")
+Vinop<-c(-5,6.75,1.75)
+Ropap<-c(6,-6,0)
+
+dfp<-data.frame(Paísp,Vinop,Ropap)
+myftp<-flextable(dfp)
+bftp<-bold(myftp,i=1, part="header")
+bftp<-set_header_labels(bftp,Paísp="País",Vinop="Vino",Ropap="Ropa")
+bftp<-set_caption(bftp,caption="Cambio en la producción por reasignación de trabajo",style="Table Caption")
+bftp
+```
+Con la reasignación de trabajo fue posible aumentar la producción de vino sin afectar la de ropa. Esta ganancia puede explotarse aún más si Inglaterra sige reasignando trabajo hacia la producción de ropa y Portugal hacia la de vino. Las ganancias de eficiencia se reparten entre los dos países. 
+
+La razón por la cual la reasignación produjo estas ganancias se pueden apreciar en la última columna de la primera tabla. Allí se presenta la razón $V/R$, la cual indica cuanto trabajo se requiere en la producción de vino en relación al requerido en la producción de una unidad de vino. Luego, si quiere producir una unidad adicional de vino debe reasignar 120 unidades de trabajo usado en ropa por cada unidad de vino adicional, y por lo tanto renunciar a 1.2 unidades de vino. Si decide producir una unidad adicional de ropa requiere reasignar 100 unidades de trabajo y por lo tanto renuncia a 0.83 unidades de vino. Si hacemos el mismo ejercicio para Portugal vemos que debe renunciar a 0.88 unidades de vino por cada unidad adicional de ropa, y a 1.125 unidades de vino por cada unidad adicional de ropa. Es claro que el costo de oportunidad para Inglaterra es más bajo si produce ropa, 0.83 de vino por cada unidad de ropa, mientras que para Portugal el costo de oportunidad más bajo está en la producción de vino, 0.88 unidades de ropa por cada unidad de ropa. 
+
+Decimos que Inglaterra tiene ventaja comparativa en la producción de ropa y Portugal en la producción de vino. En consecuencia, si los dos países pueden comerciar libremente, Portugal se especializará en la producción de vino y exportará vino, e Inglaterra en la producción y exportación de ropa. 
+
+En el modelo planteado por Ricardo la ventaja comparativa tiene su origen en las diferencias de productividad laboral entre países (diferencias tecnológicas). La ventaja comparativa también puede originarse en las diferencias entre países en sus dotaciones de recursos productivos. Por ejemplo, si Colombia es relativamente abundante en mano de obra no calificada y EE.UU en mano de obra calificada, entonces Colombia tenderá a exportar aquellos bienes que hagan uso intensivo de mano de obra no calificada (manufactura liviana, algunos productos agrícolas) y EE.UU aquellos bienes que usan intensivamente mano de obra calificada (servicios empresariales complejos, tecnología,...).
+
+El comercio basado en la ventaja comparativa es aquel en el que los flujos comerciales entre países corresponden al intercambio de bienes muy diferentes, flores por maquinaria. Sin embargo, como vimos, una parte importante del comercio corresponde a exportaciones e importaciones de bienes similares (química y farmaceutica, por ejemplo). Para explicar este tipo de comercio se ha acudido a dos ideas: i) economías de escala, y ii) variedades de un producto, o productos diferenciados. La lógica es la siguiente. Al permitir el libre comercio el tamaño del mercado aumenta (las firmas tienen acceso potencial al mercado doméstico y al del otro país), así como la competencia con importaciones. En este entorno, cada productor produce una variedad de un bien, por ejemplo carros diferenciados por la marca, con una estructura de costos donde el costo medio decrece en la medida que aumenta la producción, economías de escala. Así, si la firma logra mantenerse en el mercado entonces logrará expandir su producción, reducir su costo medio, y exportar su producto diferenciado al otro país. Lo mismo ocurre con las firmas del otro país. En este mundo las firmas que sobreviven son las más productivas, con lo cual la competencia inducida por la liberalización comercial mejora la productividad del sector económico y y contribuye a incrementar la de la economía como un todo. 
+
+Note que el comercio basado en la ventaja comparativa es beneficioso para los países pues se hace el mejor uso posible de los recursos productivos a disposición, asignación eficiente. En el caso del comercio basado en las economías de escala, el beneficio proviene de las ganancias en productividad, menores precios, y un mayor número de productos para consumir. 
+
+Si el libre comercio es beneficioso ¿Por qué es un tema tan debatido e incluso con tanta oposición? Lea el módulo 18 del libro [La Economía](https://www.core-econ.org/the-economy/book/es/text/0-3-contents.html) y discuta. 

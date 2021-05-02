@@ -1,0 +1,74 @@
+# El mercado de trabajo
+
+En este capítulo se analiza el mercado laboral colombiano, tanto desde el punto de vista de la demanda como de la oferta. Para ello, es necesario entender como se miden los principales indicadores del mercado de trabajo, así como su evolución en las últimas décadas. Haremos énfasis en dos aspectos distintivos de la realidad colombiana: i) una tasa de desempleo persistentemente alta, y ii) una alta proporción de empleo informal. 
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE, fig.cap="Clasificación laboral de la población. Datos a Marzo 2021, DANE"}
+library(DiagrammeR)
+grViz(diagram = "digraph flowchart {
+  node [fontname = helvetica, shape = rectangle, color = grey,width=2]
+  edge [color = black, arrowhead = none, arrowtail = none]
+  tab1 [label = '@@1']
+  tab2 [label = '@@2']
+  tab3 [label = '@@3']
+  tab4 [label = '@@4']
+  tab5 [label = '@@5']
+  tab6 [label = '@@6']
+  tab7 [label = '@@7']
+
+  tab1 -> tab2;
+  tab1 -> tab3;
+  tab2 -> tab4;
+  tab2 -> tab5;
+  tab4 -> tab6;
+  tab4 -> tab7;
+}
+  [1]: 'Población Total: 49.8'
+  [2]: 'PET: 40.2'    
+  [3]: 'No PET: 9.6'    
+  [4]: 'PEA: 24.2'
+  [5]: 'Inactiva: 16'
+  [6]: 'Ocupados: 20.8 '
+  [7]: 'Desocupados: 3.4'    
+  ")
+```
+- Población en Edad de Trabajar, PET: personas de 12 años o más en la zona urbana, y 10 años o más en la zona rural
+
+- Población Económicamente Activa: fuerza laboral, es decir aquellas personas en edad de trabajar, que trabajan o están buscando empleo
+
+- Ocupados: personas que durante el periodo de referencia se encontraban; i) trabajaron por lo menos una hora remunerada, ii) no trabajaron pero tenían trabajo, iii) trabajador sin remuneración y trabajó por lo menos 1 hora
+
+- Desocupados: son las personas que en la semana de referencia estaban sin empleo
+
+- Inactivos: personas en edad de trabajar pero que no tenían una razón válida de desempleo: i) no desea conseguir trabajo, ii) problemas de salud, iii) responsabilidades familiares, iv) estudiando, vi) discapacidad
+
+A partir de las anteriores clasificaciones se construyen los principales indicadores del mercado laboral
+
+- Tasa de Desempleo: $TD=\dfrac{Desocupados}{PEA}$
+
+- Tasa Global de Participación: $TGP=\dfrac{PEA}{PET}$
+
+- Tasa de Ocupación: $TO=\dfrac{Ocupados}{PET}$
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE, fig.cap="Indicadores del mercado laboral. Enero 2001-Marzo 2021.DANE"}
+library(readxl)
+library(viridis)
+library(ggplot2)
+library(plotly)
+td <- read_excel("td.xlsx")
+
+ml<-ggplot(td,aes(x=fecha,y=value,group=indicador,color=indicador))+geom_line()+
+  scale_color_viridis(discrete=TRUE,option="D")+theme_minimal()+theme(legend.position="bottom",legend.title=element_blank())+
+  xlab("")+ylab("")
+ml<-ggplotly(ml)
+ml
+```
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE, fig.cap="TD 7 Áreas Metropolitanas, trimestral 1984-2020. DANE"}
+td7 <- read_excel("td7.xlsx")
+td7<-ggplot(td7,aes(x=fecha,y=td7))+geom_line()+theme_minimal()+
+  ylab("TD 7 Áreas Metropolitanas")+xlab("")
+td7<-ggplotly(td7)
+td7
+```
+
+

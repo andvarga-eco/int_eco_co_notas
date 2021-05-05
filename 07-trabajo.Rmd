@@ -2,6 +2,8 @@
 
 En este capítulo se analiza el mercado laboral colombiano, tanto desde el punto de vista de la demanda como de la oferta. Para ello, es necesario entender como se miden los principales indicadores del mercado de trabajo, así como su evolución en las últimas décadas. Haremos énfasis en dos aspectos distintivos de la realidad colombiana: i) una tasa de desempleo persistentemente alta, y ii) una alta proporción de empleo informal. 
 
+## Los indicadores del mercado laboral
+
 ```{r, echo=FALSE, warning=FALSE,message=FALSE, fig.cap="Clasificación laboral de la población. Datos a Marzo 2021, DANE"}
 library(DiagrammeR)
 grViz(diagram = "digraph flowchart {
@@ -63,6 +65,13 @@ ml<-ggplotly(ml)
 ml
 ```
 
+La gráfica anterior muestra la evolución de los indicadores del mercado de trabajo para el periodo 2001-2021. Note que en las tres series hay un comportamiento recurrente. En enero de cada año la tasa de desempleo suele ser más alta y las tasas de participación y ocupación más bajas. Esto es lo que se conoce como un componente estacional, y que en el caso de estas series tiene que ver con la dinámica laboral asociada a la temporada navideña. 
+
+Los indicadores del mercado laboral están estrechamente relacionados con el comportamiento general de la economía. En los periodos de crecimiento económico sostenido la tasa de desempleo tiende a la baja, mientras que las tasas de ocupación y participación al alza. Así, hasta el 2014, cuando la economía mantuvo un ritmo de crecimiento aceptable, a excepción del periodo 2008-2009 cuando se sintieron en la economía colombiana los efectos de la crisis financiera de EE.UU, la tasa de desempleo descendió lentamente mientras que la TO y la TGP se movieron al alza. A partir de 2015 el crecimiento económico se hace más lento, con lo cual la TD deja de disminuir, incluso se incrementa, mientras que la TO y la TGP disminuyen. 
+
+El año 2020 marca un hito. El deterioro del mercado laboral fue de una magnitud y velocidad sin precedentes. No solamente aumentó el desempleo, sino que muchos trabajadores pasaron de la ocupación a la inactividad. De no ser así, la tasa de desempleo habría sido varios puntos porcentuales más alta. 
+
+
 ```{r,echo=FALSE, warning=FALSE,message=FALSE, fig.cap="TD 7 Áreas Metropolitanas, trimestral 1984-2020. DANE"}
 td7 <- read_excel("td7.xlsx")
 td7<-ggplot(td7,aes(x=fecha,y=td7))+geom_line()+theme_minimal()+
@@ -70,5 +79,119 @@ td7<-ggplot(td7,aes(x=fecha,y=td7))+geom_line()+theme_minimal()+
 td7<-ggplotly(td7)
 td7
 ```
+
+
+## ¿La pandemía afectó por igual a todos los trabajadores en 2020?
+
+Ya sabemos que como consecuencia de la pandemia por el Covid-19 el desempleo aumentó de manera espectacular. Sin embargo, no todos los grupos poblaciones fueron afectados de la misma manera. A continuación se presenta la evolución de la TD y TO para diferentes grupos
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+library(haven)
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+geih1920<- read_dta("C:/Users/andre/Google Drive/Uninorte/emergencia covid19/data/choque_covid/area1920_short.dta")
+geih1920<-subset(geih1920,ft==1)
+#Declarar fechas
+geih1920$mes1[geih1920$month=="Enero"]=1
+geih1920$mes1[geih1920$month=="Febrero"]=2
+geih1920$mes1[geih1920$month=="Marzo"]=3
+geih1920$mes1[geih1920$month=="Abril"]=4
+geih1920$mes1[geih1920$month=="Mayo"]=5
+geih1920$mes1[geih1920$month=="Junio"]=6
+geih1920$mes1[geih1920$month=="Julio"]=7
+geih1920$mes1[geih1920$month=="Agosto"]=8
+geih1920$mes1[geih1920$month=="Septiembre"]=9
+geih1920$mes1[geih1920$month=="Octubre"]=10
+geih1920$mes1[geih1920$month=="Noviembre"]=11
+geih1920$mes1[geih1920$month=="Diciembre"]=12
+
+geih1920$fecha<-make_date(geih1920$year,geih1920$mes1)
+#dummy Ocupado: ocupado=1, deso o inac=0
+geih1920$ocu<-ifelse(is.na(geih1920$ocu),0,geih1920$ocu) 
+#dummy inactivo
+geih1920$inac<-ifelse(is.na(geih1920$inac),0,geih1920$inac)
+#Dummy mujer
+geih1920$mujer[geih1920$p6020==1]=0
+geih1920$mujer[geih1920$p6020==2]=1
+#Dummy ft jovenes: p6040<26
+geih1920$joven<-ifelse(geih1920$p6040<26,1,0)
+geih1920$desjoven<-ifelse(geih1920$joven==1,geih1920$deso,NA )#joven desempleado
+geih1920$ocujoven<-ifelse(geih1920$joven==1,geih1920$ocu,NA )#joven ocupado
+#Dummy skill
+geih1920$edsup<-if_else(geih1920$esc>14,1,0)
+
+#Gráfica TD TO
+grafmujer<-geih1920%>%group_by(fecha,mujer)%>%
+  summarise(TD=weighted.mean(deso,fex_c_2011,na.rm=TRUE),
+            TO=weighted.mean(ocu,fex_c_2011,na.rm=TRUE))%>%ungroup()
+grafmujer$Sexo<-ifelse(grafmujer$mujer==1,"Mujer","Hombre")
+
+tdm<-ggplot(data=grafmujer,aes(x=fecha,y=TD,group=mujer,color=Sexo))+
+  geom_line()+scale_color_manual(values=c("black","red"))+ylim(0.0,0.3)+
+  geom_vline(xintercept=as.numeric(as.Date("2020-03-01")),linetype=4)
+
+tom<-ggplot(data=grafmujer,aes(x=fecha,y=TO,group=mujer,color=Sexo))+
+  geom_line()+scale_color_manual(values=c("black","red"))+ylim(0.2,0.9)+
+  geom_vline(xintercept=as.numeric(as.Date("2020-03-01")),linetype=4)
+
+grafj<-geih1920%>%group_by(fecha,joven)%>%
+  summarise(TD=weighted.mean(deso,fex_c_2011,na.rm=TRUE),
+            TO=weighted.mean(ocu,fex_c_2011,na.rm=TRUE))%>%ungroup()
+grafj$Edad<-ifelse(grafj$joven==1,"<25",">=25")
+
+tdj<-ggplot(data=grafj,aes(x=fecha,y=TD,group=joven,colour=Edad))+
+  geom_line()+scale_color_manual(values=c("red","black"))+ylim(0.0,0.45)+
+  geom_vline(xintercept=as.numeric(as.Date("2020-03-01")),linetype=4)
+
+toj<-ggplot(data=grafj,aes(x=fecha,y=TO,group=joven,colour=Edad))+
+  geom_line()+scale_color_manual(values=c("red","black"))+ylim(0.15,0.8)+
+  geom_vline(xintercept=as.numeric(as.Date("2020-03-01")),linetype=4)
+
+grafed<-geih1920%>%filter(!is.na(edsup))%>%group_by(fecha,edsup)%>%
+  summarise(TD=weighted.mean(deso,fex_c_2011,na.rm=TRUE),
+            TO=weighted.mean(ocu,fex_c_2011,na.rm=TRUE))%>%ungroup()
+grafed$Escolaridad<-if_else(grafed$edsup==1,">14","<=14",missing=NULL)
+
+tded<-ggplot(data=grafed,aes(x=fecha,y=TD,group=edsup,colour=Escolaridad))+
+  geom_line()+geom_point()+scale_color_manual(values=c("red","black"))+ylim(0.0,0.3)+
+  geom_vline(xintercept=as.numeric(as.Date("2020-03-01")),linetype=4)
+
+toed<-ggplot(data=grafed,aes(x=fecha,y=TO,group=edsup,colour=Escolaridad))+
+  geom_line()+geom_point()+scale_color_manual(values=c("red","black"))+ylim(0.2,0.9)+
+  geom_vline(xintercept=as.numeric(as.Date("2020-03-01")),linetype=4)
+```
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Mujeres y Hombres"}
+figm<-ggarrange(tdm,tom,
+               ncol=1,nrow=2)
+figm
+```
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Jóvenes y Adultos"}
+figj<-ggarrange(tdj,toj,
+                ncol=1,nrow=2)
+figj
+```
+
+```{r,,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Calificada y No calificada"}
+figed<-ggarrange(tded,toed,
+                ncol=1,nrow=2)
+figed
+```
+
+
+
+
+
+
+
+
+
+
+
 
 

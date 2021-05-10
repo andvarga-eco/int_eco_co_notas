@@ -177,13 +177,41 @@ figj<-ggarrange(tdj,toj,
 figj
 ```
 
-```{r,,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Calificada y No calificada"}
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Calificada y No calificada"}
 figed<-ggarrange(tded,toed,
                 ncol=1,nrow=2)
 figed
 ```
 
+De las gráficas anteriores puede concluirse, preliminarmente, lo siguiente
 
+1. La brecha entre hombres y mujeres se amplió, en contra de ellas. Si bien al principio de la pandemía la diferencia se cierra, el dearrollo posterior muestra que la recuperación laboral ha sido más lenta en el caso de las mujeres
+
+2. El desempleo juvenil aumento más que entre la población adulta y su recuperación ha sido más lenta
+
+3. La pandemía afecto inicialmente de forma más fuerte a los trabajadores que no han cursado estudios superiores, aunque hacia finales de 2020 la brecha ha tendido a ubicarse en niveles previos a la pandemía
+
+¿Por qué unos grupos poblacionales han más afectados que otros? Una respuesta tentativa sería que las personas más jóvenes, especialmente las mujeres, y con menores niveles de educación, se ocupan primordialmente en actividades de servicios de baja complejidad -ej. comercio al por menor, hospitalidad- que han sido más afectados por las medidas de restricción de la movilidad como respuesta a la pandemia. Recuperar la creación de puestos de trabajo para esta población es una de las prioridades más apremiantes que enfrenta la sociedad colombiana en este momento. En el pasado, choques económicos severos y negativos han tenido efectos persistentes sobre el desempleo
+
+## TD en comparación internacional
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="TD 2000-2019. Fuente: WDI"}
+td_paises <- read_excel("td_paises.xlsx")
+tdh<-ggplot(td_paises,aes(x=av0019))+geom_histogram(col="black",fill="red")+
+  theme_classic()+xlab("Tasa de Desempleo")+ylab("# Paises")+geom_vline(xintercept=11.5,linetype=4)
+tdh<-ggplotly(tdh)
+tdh
+```
+
+La tasa de desempleo en Colombia promedió 11.5% para el periodo 2000-2019. En una muestra de 187 países, la media para este periodo es de 8%, mientras que la mediana es de 6.54%. El percentil 75 es 10.6%. Es claro que Colombia se encuentra entre el 25% de los valores más altos. Note también que la pandemía tuvo un efecto notable en Colombia, en comparación con lo sucedido en muchos otros paises
+
+```{r,echo=FALSE, warning=FALSE, message=FALSE, fig.cap="TD 2019-2020. Fuente: WDI"}
+library(ggrepel)
+td1920<-ggplot(td_paises,aes(x=y2019,y=y2020))+geom_point()+geom_abline(linetype=4,color="blue")+
+  geom_label_repel(data=subset(td_paises,country=="Colombia"),aes(label=country,size = NULL, color = NULL), nudge_y = 0.75)+theme_classic()+ylab("TD 2020")+xlab("TD 2019")
+td1920
+
+```
 
 
 

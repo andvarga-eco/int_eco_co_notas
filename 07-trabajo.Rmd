@@ -216,6 +216,26 @@ td1920
 
 
 
+## ¿Por qué es tan alta la TD en Colombia?
+
+Como se mostró arriba, Colombia tiene una TD de desempleo estructuralmente alta. Podemos decir además que el desempleo tiende a ser más alto para las mujeres, los jóvenes, y aquellos con menos años de educación formal. Para tratar de ofrecer alguna respuesta a este fenómeno examinaremos principalmente la demanda laboral. 
+
+¿Qué determina cuánto trabajo quiere contratar una firma a los salarios vigentes? Podemos mencionar los siguientes aspectos
+
+1. Cambio técnico: en general la tecnología incrementa la productividad del trabajo, lo que debería incentivar la demanda laboral. Sin embargo, cuando dicho cambio tecnológico favorece al trabajo calificado sobre el no calificado, entonces la demanda del primero aumenta en relación a la del segundo. Esto no solamente puede inducir una ampliación de las brechas salariales, sino que además puede resultar en pérdidas de puestos de trabajo no calificado. El cambio técnico se origina por un lado en la dinámica misma de la innovación tecnológica, mientras que la adopción en la producción puede ser acelerada o ralentizada por reformas y políticas económicas. Por ejemplo, el libre comercio facilita el acceso a maquinaria, equipo de computo, etc.
+
+Además de la potencial pérdida neta de puestos de trabajo, otra consecuencia posible es la reasignación del trabajo hacia sectores menos intensivos en capital, especialmente servicios de baja complejidad. ¿Quiere decir esto que debemos detener el cambio técnico? 
+
+2. Regulación del mercado de trabajo: en el caso Colombiano los aspectos de mayor discusión son el salario mínimo, y los costos laborales no salariales. En el primer caso se fija un monto mínimo de remuneración que debe recibir un trabajador. El salario mínimo se fija a partir de un proceso de negociación en el marco de la *Comisión permanente de concertación de políticas salariales y laborales*. Allí tienen asiento los sindicatos, los gremios de la producción, y el gobierno. Como criterios para la negociación se usan la inflación causada y el crecimiento de la productividad, principalmente. Se argumenta que el salario mínimo contribuye al desempleo en la medida que este es muy elevado, y por lo tanto los empleadores no quieren contratar trabajadores a dicho salario. También se argumenta que el efecto principal no es tanto en desempleo, como en el incentivo que genera para que las relaciones de trabajo se den en el ámbito informal. 
+
+Por su parte, los costos laborales no salariales, como los parafiscales y las contribuciones de seguridad social a cargo del empleador, significan que en Colombia un trabajador le cuesta al empleador alrededor de un 37% más que lo pactado con el trabajador. En 2021, un trabajador con salario mínimo tiene un costo mensual aproximado para el empleador de $\$1495,802$, pero este mismo trabajador recibe una compensación neta de $\$942,298$. Al igual que con el salario mínimo, se argumenta que estos costos entorpecen la creación de empleo y promueven el trabajo informal.
+
+La investigación económica sobre el tema es abundante y señala que los efectos negativos de este tipo de regulaciones se da si ello resulta en un costo laboral efectivo muy alto, en relación a la productividad del trabajo. Sin embargo, si no es muy alto, entonces quizás no producen pérdida de empleo y por el contrario fortalecen la posición de negociación del trabajador. Una idea acá es que el mercado de trabajado no tiene una estructura competitiva, sino que más bien tiene rasgos de monopsonio. Muchos oferentes y pocos demandantes, con lo cual el demandante tiene poder negociación y fija salarios por debajo de los que se fijarían en competencia. En últimas, la relación entre los costos laborales que implican estas regulaciones y el empleo no es lineal, y por lo tanto no hay una respuesta única, sino más bien un "depende".
+
+3. Demanda agregada: si la demanda por bienes y servicios es insuficiente, entonces los productores no usarán su plena capacidad productiva y por lo tanto los trabajadores estarán desempleados porque no hay demanda por bienes y servicios. Esto puede dar lugar a un desempleo persistente. Bajo esta lógica es clave que haya más competencia en los mercados de bienes y servicios, baja precios y aumenta la demanda, e incrementos en la productividad laboral, aumenta el salario real y el consumo de bienes y servicios. Acá, los costos laborales no salariales se traducen en precios de bienes  y servicios más altos, con lo cual hay menor demanda por ellos y por lo tanto menos empleo. 
+
+
+
 
 
 

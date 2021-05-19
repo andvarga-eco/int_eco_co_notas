@@ -1,0 +1,53 @@
+# Pobreza
+
+La pobreza tiene que ver con un estado de privación. Una manera común es entenderla como la insuficiencia de ingresos, sin embargo, no es evidente cuánto es el nivel de ingresos mínimo que se considera suficiente. En la práctica se usan diversas aproximaciones. El economista Amartya Sen ha propuesto entender la pobreza como la privación de capacidades @sen1999, es decir la ausencia de libertad sustantiva para llevar a cabo la vida que la persona tiene motivos para valorar y querer llevar. En el enfoque de capacidades, el ingreso es un recurso que el individuo puede transformar en una capacidad a partir de sus habilidades. Por ejemplo, una persona con discapacidad física puede necesitar un mayor ingreso que los demás para poder alcanzar el mismo nivel de funcionamiento que estos últimos. El ingreso, es pues instrumental. Como se conceptualice la pobreza tiene también implicaciones importantes en términos de la acción pública para remediarla. En lo que sigue abordaremos la pobreza desde ambos enfoques, ingresos y capacidades, haciendo énfasis en la medición y el estado y evolución de los indicadores para Colombia.
+
+## Pobreza Monetaria
+
+Una persona se considera en estado de pobreza monetaria si no dispone del ingreso suficiente para adquirir una canasta de bienes y servicios básica o mínima. Para ello se define la línea de pobreza, entendida como el ingreso mínimo necesario para adquirir ducha canasta. Para poner esta idea en práctica es necesario definir la canasta básica de consumo. Esto no es tarea fácil pues los individuos difieren en sus preferencias y juicios respecto a que se considera como básico y necesario. En este sentido, la línea de pobreza siempre podrá ser controvertida y considerada muy baja por algunos y muy alta por otros. 
+
+La línea de pobreza se construye a partir de dos componentes: 1) el costo de adquirir una canasta básica de alimentos, 2100 calorias diarias, y 2) el costo de los demás bienes y servicios. Estos últimos expresados sobre la base entre el gasto total y el gasto en alimentos. 
+
+El segundo componente implica que no se trabaja con base en una lista de bienes y servicios considerados de primera necesidad por algún comité de expertos o sabios, sino que se infiere a partir de los patrones de gasto del consumidor.  Así, a partir de la frecuencia de consumo y el gasto realizado se selecciona una canasta de artículos no alimentaria para cada dominio geográfico. Para Barranquilla A.M, por ejemplo, esta canasta está compuesta de 30 artículos, y se encuentra que el gasto en estos es 2.2 veces el gasto realizado en alimentos. Para Barranquilla A.M en 2020 se calculó la línea de pobreza extrema, componente 1, en $\$152,410$ por persona de la unidad de gasto, que al multilpicar por 2.2 da una línea de pobreza de $\$338,666$ por persona de la unidad de gasto. Para una explicación detallada del procedimiento ver el sitio del [DANE](https://www.dane.gov.co/files/investigaciones/condiciones_vida/pobreza/2019/Presentacion_pobreza_monetaria_actualizacion_metodologica_2019.pdf).
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE, fig.cap="Distribución del ingreso per cápita UG, 2019"}
+library(haven)
+library(ggplot2)
+library(plotly)
+hog19<- read_dta("C:/Users/andre/Google Drive/Uninorte/emergencia covid19/data/Pobreza/2019/Hogaresd.dta")
+p19<-read_dta("C:/Users/andre/Google Drive/Uninorte/emergencia covid19/data/Pobreza/2019/Personasd.dta")
+hog19p<-subset(hog19,select=c(directorio,secuencia_p,npersug,ingpcug,lp,li,pobre))
+p19p<-subset(p19,select=c(directorio,secuencia_p,orden,ingtot))
+rm(hog19,p19)
+pov19<-ggplot(hog19p,aes(x=ingpcug))+geom_histogram(col="black",fill="red",alpha=0.5)+xlim(0,3000000)+geom_vline(xintercept=348346,linetype=4,color="blue")+geom_vline(xintercept=141732,linetype=4,color="dark green")+xlab("Ingreso per cápita de la unidad de gasto")+ylab("Frecuencia")+annotate("text", x =209000 , y = 29000,label="LI")+annotate("text", x =413000 , y = 29000,label="LP")+
+  theme_classic()
+pov19<-ggplotly(pov19)
+pov19
+```
+
+
+Para 2020, se estima que el 42.5% de la población, 21 millones, tuvo un ingreso mensual inferior al de la línea de pobreza, mientras que el 15.1% de la población, 7.47 millones no alcanzó a tener un ingreso mensual superior al de la línea de pobreza extrema. En 2019 la incidencia de pobreza y pobreza extrema fue del 35.75 y 9.6% respectivamente. 
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE, fig.cap="Evolución de la pobreza por dominio geográfico"}
+library(readxl)
+library(gghighlight)
+pov_dom<- read_excel("poverty_ciudades.xlsx")
+pov_t<-ggplot(pov_dom,aes(x=year,y=tasa,group=dominio,color=dominio),size=4)+geom_line()+gghighlight(dominio=="Barranquilla A.M." | dominio=="Bogotá"|dominio=="Cartagena")+xlab("")+ylab("Porcentaje en pobreza")+theme_classic()
+pov_t<-ggplotly(pov_t)
+pov_t
+```
+
+### Cambio temporal en la incidencia de pobreza monetaria
+
+Siguiendo a @inchauste2014 el ingreso monetario per cápita puede definirse como  
+\begin{equation}
+Y_{pc}=\dfrac{n_a}{n}\big[\dfrac{n_o}{n_a}\big(\dfrac{1}{n_o}\sum_{i=1}^{n}Y_i^L\big)+\dfrac{1}{n_a}\sum_{i=1}^{n}Y_i^{NL}\big]
+\end{equation}
+Donde $n$ es el número de personas en el hogar, $n_a$ el número de adultos en el hogar, $n_o$ los adultos del hogar que están ocupados, $Y_i^L$ el ingreso laboral y $Y_i^{NL}$ el ingreso no laboral. De lo anterior vemos que la incidencia de pobreza monetaria cambia por modificaciones en el ingreso laboral y no laboral, y la composición del hogar. Siguiendo el método propuesto por @inchauste2014 observamos la descomposición para Barranquilla en los periodos 2012-2018, 2012-2019
+
+```{r,echo=FALSE,fig.cap="Descomposición de la pobreza. Datos GEIH, cálculos propios"}
+knitr::include_graphics("pov_dec.png")
+```
+
+
+Note que la reducción de la pobreza en Barranquilla A.M en el periodo de estudio estuvo principalmente explicada por el incremento en los ingresos laborales, y la mayor proporción de adultos ocupados al interior de cada hogar. Es claro que el avance logrado estuvo asociado a la dinámica del mercado laboral en ese periodo. Extrapolando estos resultados hacia 2020, se podría decir que el incremento vertiginoso obedeció a: 1) disminución de la ocupación, 2) caída de los ingresos laborales, principalmente. 
